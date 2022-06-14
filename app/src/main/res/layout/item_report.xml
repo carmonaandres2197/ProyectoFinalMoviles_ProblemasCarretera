@@ -27,7 +27,7 @@
            android:id="@+id/sub_item"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
-           android:visibility="visible"
+           android:visibility="gone"
            android:paddingBottom="12dp"
            android:background="@color/gray"
 
