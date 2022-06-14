@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="4dp">
+
+    <LinearLayout
+        android:id="@+id/layout_list_reporte"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="4dp"
+        android:background="@drawable/bg_rounded_corner"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/nombre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="Nombre"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+           android:id="@+id/sub_item"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:visibility="visible"
+           android:paddingBottom="12dp"
+           android:background="@color/gray"
+
+           android:orientation="vertical">
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_marginStart="10dp"
+               android:layout_marginTop="12dp"
+               android:padding="2dp"
+               android:orientation="horizontal">
+               <ImageView
+                   android:layout_width="16dp"
+                   android:layout_height="16dp"
+                   android:src="@drawable/ic_person"/>
+               <TextView
+                   android:id="@+id/usuario"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginBottom="10dp"
+                   android:text="Usuario que reporta"
+                   android:textColor="@color/black"/>
+           </LinearLayout>
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_marginStart="10dp"
+               android:padding="2dp"
+               android:orientation="horizontal">
+               <ImageView
+                   android:layout_width="16dp"
+                   android:layout_height="16dp"
+                   android:src="@drawable/ic_geo_pin"/>
+               <TextView
+                   android:id="@+id/ubicacion"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginBottom="10dp"
+                   android:text="Ubicación exacta"
+                   android:textColor="@color/black"/>
+           </LinearLayout>
+
+
+           <LinearLayout
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:gravity="center_vertical"
+               android:padding="2dp"
+               android:orientation="horizontal">
+               <ImageView
+                   android:layout_width="16dp"
+                   android:layout_height="16dp"
+                   android:layout_marginStart="16dp"
+                   android:layout_marginEnd="2dp"
+                   android:src="@drawable/ic_play_circle"/>
+               <TextView
+                   android:id="@+id/ver_video"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+
+                   android:text="Ver video"
+                   android:layout_marginRight="10dp"
+                   android:textColor="@color/black"/>
+               <ImageView
+                   android:layout_width="16dp"
+                   android:layout_height="16dp"
+                   android:layout_marginStart="10dp"
+                   android:layout_marginEnd="2dp"
+                   android:src="@drawable/ic_map"/>
+               <TextView
+                   android:id="@+id/ver_mapa"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="Ver en el mapa"
+                   android:textColor="@color/black"/>
+           </LinearLayout>
+
+
+       </LinearLayout>
+
+</LinearLayout>
