@@ -34,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
         gsc = GoogleSignIn.getClient(this,gso);
 
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+        DataBase database = new DataBase();
+        database.obtenerReportes();
+
         if(acct!=null){
             navigateToSecondActivity();
         }
