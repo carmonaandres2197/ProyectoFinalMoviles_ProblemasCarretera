@@ -1,3 +1,5 @@
+package classes;
+
 public class Address {
       String canton;
       String distrito;
