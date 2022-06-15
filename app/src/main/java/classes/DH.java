@@ -1,4 +1,7 @@
-import javax.print.attribute.standard.Severity;
+package classes;
+
+
+import java.util.Date;
 
 public class DH {
     Date creationDate;
@@ -9,42 +12,42 @@ public class DH {
     public DH(Date creationDate,
             Severity severity,
             boolean state,
-            String Nombre) {
+            String nombre) {
         this.creationDate = creationDate;
         this.severity = severity;
         this.state = state;
         this.nombre = nombre;
     }
 
-    public setCreationDate(String creationDate ){
+    public  void setCreationDate(Date creationDate ){
           this.creationDate =creationDate;
      }
 
-    public setSeverity(Severity severity ){
-        this.severity =creationDate;
+    public void setSeverity(Severity severity ){
+        this.severity = severity;
    }
 
-   public setEstate(boolean state ){
+   public void setEstate(boolean state ){
     this.state = state;
 }
 
-public setNombre(String nombre ){
+public void setNombre(String nombre){
     this.nombre =nombre;
 }
 
-public getCreationDate(){
+public Date getCreationDate(){
     return this.creationDate;
 }
 
-public getSeverity(){
+public Severity getSeverity(){
     return this.severity;
 }
 
-public getEstate(){
+public boolean getEstate(){
     return this.state;
 }
 
-public getNombre(){
+public String getNombre(){
     return this.nombre;
 }
 

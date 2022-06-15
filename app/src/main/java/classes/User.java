@@ -1,3 +1,5 @@
+package classes;
+
 public class User {
     String fullName;
     String email;
@@ -11,33 +13,32 @@ public class User {
          this.idRol =idRol;
     }
 
-    public getFullName (){
+    public String getFullName (){
         return this.fullName;
     }
-    public getEmail (){
+    public String getEmail (){
         return this.email;
     }
-    public getProfilePictureUrl (){
+    public String getProfilePictureUrl (){
         return this.profilePictureUrl;
     }
-    public getIdRol (){
+    public int getIdRol (){
         return this.idRol;
     }
 
-    public setFullName(String fullName){
+    public void setFullName(String fullName){
         this.fullName = fullName; 
     }
 
-    public setEmail(String email){
+    public void setEmail(String email){
         this.email = email;
     }
 
-    public setProfile(String profileUrl){
-        this.profileUrl = profileUrl;
+    public void setProfile(String profileUrl){
+        this.profilePictureUrl = profileUrl;
     }
-
-    public setIdRol(int rol){
-        this.rol = rol;
+    public void setIdRol(int rol){
+        this.idRol = rol;
     }
 
 }
