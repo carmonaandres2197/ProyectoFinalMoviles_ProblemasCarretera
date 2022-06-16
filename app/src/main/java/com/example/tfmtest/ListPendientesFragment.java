@@ -53,14 +53,14 @@ public class ListPendientesFragment extends Fragment {
         Reporte reporte2 = new Reporte();
         reporte2.setNombre("Prueba 2");
         reporte2.setFecha(date2);
-        reporte2.setEstado("Atendido");
+        reporte2.setEstado(false);
         reporte2.setIdUsuario("Roy");
         reporte2.setUbicacion("Villa Bonita");
 
         Reporte reporte3 = new Reporte();
         reporte3.setNombre("Prueba 3");
         reporte3.setFecha(date2);
-        reporte3.setEstado("Atendido");
+        reporte3.setEstado(true);
         reporte3.setIdUsuario("Juan");
         reporte3.setUbicacion("Sabanilla");
 

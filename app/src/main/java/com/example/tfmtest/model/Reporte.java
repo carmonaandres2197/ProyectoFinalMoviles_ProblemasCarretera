@@ -1,12 +1,13 @@
 package com.example.tfmtest.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Reporte implements Comparable<Reporte> {
     String nombre;
     Date fecha;
     String severidad;
-    String estado;
+    Boolean estado;
     String ubicacion;
     String ubicacionGoogleMaps;
     String nombreusuarioCrea;
@@ -40,11 +41,11 @@ public class Reporte implements Comparable<Reporte> {
         this.severidad = severidad;
     }
 
-    public String getEstado() {
+    public Boolean getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(Boolean estado) {
         this.estado = estado;
     }
 
