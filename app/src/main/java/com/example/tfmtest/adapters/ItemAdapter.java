@@ -13,11 +13,12 @@ import com.example.tfmtest.R;
 import com.example.tfmtest.model.Reporte;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ItemAdapter extends
         RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
-    ArrayList<Reporte> reportes;
+    List<Reporte> reportes;
 
     public ItemAdapter(ArrayList<Reporte> reportes) {
         this.reportes = reportes;
@@ -71,7 +72,7 @@ public class ItemAdapter extends
         return position;
     }
 
-    public void setResults(ArrayList<Reporte> reportes) {
+    public void setResults(List<Reporte> reportes) {
         this.reportes = reportes;
         notifyDataSetChanged();
     }
