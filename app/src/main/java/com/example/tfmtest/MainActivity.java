@@ -6,9 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.tfmtest.interfaces.Callback;
+import com.example.tfmtest.model.Reporte;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -16,6 +19,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,10 +44,12 @@ public class MainActivity extends AppCompatActivity {
 
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
 
+
         if(acct!=null){
             navigateToSecondActivity();
         }
 
+        //botonParaAbrirTabActivity();
 
         googleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,9 +57,6 @@ public class MainActivity extends AppCompatActivity {
                 signIn();
             }
         });
-
-
-
     }
 
     void signIn(){
@@ -75,5 +83,59 @@ public class MainActivity extends AppCompatActivity {
         finish();
         Intent intent = new Intent(MainActivity.this,SecondActivity.class);
         startActivity(intent);
+    }
+
+    /*Metodos para prueba*/
+    public void botonParaAbrirTabActivity(){
+        Button button = findViewById(R.id.loginbtn);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+                Intent intent = new Intent(MainActivity.this,TabActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+    /*Metodos para prueba*/
+    public void testInsertUpdateData(){
+        DataBase dataBase = new DataBase();
+
+        Reporte reporte = new Reporte();
+        reporte.setIdReporte(UUID.randomUUID().toString().replace("-","").toLowerCase(Locale.ROOT));
+        reporte.setEstado(true);
+        reporte.setNombre("Prueba 4");
+        reporte.setFecha(new Date());
+        reporte.setLatitud("9.634256");
+        reporte.setLongitud("-83.996543");
+        reporte.setNombreUsuarioCrea("Ricardo");
+        reporte.setUbicacion("Alajuela, Costa Rica");
+
+        //Registrar
+        dataBase.agregarRegistro(reporte,reporte.getIdReporte(), new Callback<Void>(){
+
+            @Override
+            public void onSucces(Void result) {
+                Log.i("Firestore", "Registro exitoso");
+            }
+
+            @Override
+            public void onFailed(Exception e) {
+                Log.i("Firestore", "Ocurrio un error " + e.getMessage());
+            }
+        });
+
+        //Actualizar
+//        dataBase.actualizarReporte(reporte, new Callback<Reporte>() {
+//            @Override
+//            public void onSucces(Reporte result) {
+//                Log.i("Firestore", "Registro actualizado");
+//            }
+//
+//            @Override
+//            public void onFailed(Exception e) {
+//                Log.i("Firestore",  "Ocurrio un error " + e.getMessage());
+//            }
+//        });
     }
 }

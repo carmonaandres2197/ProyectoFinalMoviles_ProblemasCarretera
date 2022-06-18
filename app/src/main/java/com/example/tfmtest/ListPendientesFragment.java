@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,11 +17,12 @@ import com.example.tfmtest.utils.Loading;
 import com.example.tfmtest.interfaces.RealtimeDataListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ListPendientesFragment extends Fragment {
 
-    private ArrayList<Reporte> reportes;
+    private List<Reporte> reportes;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private ItemAdapter itemAdapter;
@@ -48,6 +50,8 @@ public class ListPendientesFragment extends Fragment {
         dataBase.obtenerReportes(new Callback<List<Reporte>>() {
             @Override
             public void onSucces(List<Reporte> result) {
+                Collections.sort(result);
+                reportes = result;
                 itemAdapter.setResults(result);
                 Loading.hideLoading();
             }
@@ -58,26 +62,19 @@ public class ListPendientesFragment extends Fragment {
             }
         });
 
-        addRealtimeDabaseListener(reportes);
+        addRealtimeDabaseListener();
     }
 
-    private void addRealtimeDabaseListener(ArrayList<Reporte> reportes) {
-        dataBase.listenForUpdates(reportes, new RealtimeDataListener<Reporte>() {
+    private void addRealtimeDabaseListener() {
+        dataBase.listenForUpdates(itemAdapter.getReportes(), new RealtimeDataListener<List<Reporte>>() {
             @Override
-            public void onDataChange(Reporte updateData) {
-                int pos = 0;
-                for (Reporte item : reportes){
-                    if(item.getIdReporte().equals(updateData.getIdReporte())){
-                        reportes.set( reportes.indexOf(pos) , updateData);
-                        itemAdapter.notifyItemChanged(pos);
-                    }
-                    pos++;
-                }
+            public void onDataChange(List<Reporte> updateData) {
+                itemAdapter.setResults(updateData);
             }
 
             @Override
             public void onError(Exception exception) {
-
+                Toast.makeText(getActivity(), "Ocurrio un error", Toast.LENGTH_SHORT).show();
             }
         });
     }

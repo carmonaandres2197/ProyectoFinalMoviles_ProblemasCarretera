@@ -1,6 +1,5 @@
 package com.example.tfmtest.model;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 public class Reporte implements Comparable<Reporte> {
@@ -10,13 +9,13 @@ public class Reporte implements Comparable<Reporte> {
     String severidad;
     Boolean estado;
     String ubicacion;
-    String ubicacionGoogleMaps;
     String nombreUsuarioCrea;
     String idUsuario;
     String latitud;
     String longitud;
     String imagen;
     String video;
+    String pendienteAtender;
 
     public String getIdReporte() {
         return idReporte;
@@ -82,14 +81,6 @@ public class Reporte implements Comparable<Reporte> {
         this.ubicacion = ubicacion;
     }
 
-    public String getUbicacionGoogleMaps() {
-        return ubicacionGoogleMaps;
-    }
-
-    public void setUbicacionGoogleMaps(String ubicacionGoogleMaps) {
-        this.ubicacionGoogleMaps = ubicacionGoogleMaps;
-    }
-
     public String getNombreUsuarioCrea() {
         return nombreUsuarioCrea;
     }
@@ -120,6 +111,14 @@ public class Reporte implements Comparable<Reporte> {
 
     public void setLongitud(String longitud) {
         this.longitud = longitud;
+    }
+
+    public String getPendienteAtender() {
+        return pendienteAtender;
+    }
+
+    public void setPendienteAtender(String pendienteAtender) {
+        this.pendienteAtender = pendienteAtender;
     }
 
     @Override

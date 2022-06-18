@@ -20,9 +20,13 @@ public class ItemAdapter extends
 
     List<Reporte> reportes;
 
-    public ItemAdapter(ArrayList<Reporte> reportes) {
+    public ItemAdapter(List<Reporte> reportes) {
         this.reportes = reportes;
         notifyDataSetChanged();
+    }
+
+    public List<Reporte> getReportes() {
+        return reportes;
     }
 
     @NonNull
@@ -37,7 +41,7 @@ public class ItemAdapter extends
     @Override
     public void onBindViewHolder(@NonNull ItemAdapter.ViewHolder holder, int position) {
         holder.lblNombre.setText(reportes.get(position).getNombre());
-        holder.lblUsuarioReporta.setText(reportes.get(position).getIdUsuario());
+        holder.lblUsuarioReporta.setText(reportes.get(position).getNombreUsuarioCrea());
         holder.lblUbicacion.setText(reportes.get(position).getUbicacion());
 
         holder.lblVerVideo.setOnClickListener(v -> {
