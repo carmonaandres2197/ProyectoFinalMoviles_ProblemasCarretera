@@ -1,21 +1,29 @@
 package com.example.tfmtest.model;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 public class Reporte implements Comparable<Reporte> {
+    String idReporte;
     String nombre;
     Date fecha;
     String severidad;
     Boolean estado;
     String ubicacion;
-    String ubicacionGoogleMaps;
-    String nombreusuarioCrea;
+    String nombreUsuarioCrea;
     String idUsuario;
     String latitud;
     String longitud;
-    String URLimagen;
-    String URLVideo;
+    String imagen;
+    String video;
+    String pendienteAtender;
+
+    public String getIdReporte() {
+        return idReporte;
+    }
+
+    public void setIdReporte(String idReporte) {
+        this.idReporte = idReporte;
+    }
 
     public String getNombre() {
         return nombre;
@@ -49,20 +57,20 @@ public class Reporte implements Comparable<Reporte> {
         this.estado = estado;
     }
 
-    public String getURLimagen() {
-        return URLimagen;
+    public String getImagen() {
+        return imagen;
     }
 
-    public void setURLimagen(String URLimagen) {
-        this.URLimagen = URLimagen;
+    public void setImagen(String URLimagen) {
+        this.imagen = URLimagen;
     }
 
-    public String getURLVideo() {
-        return URLVideo;
+    public String getVideo() {
+        return video;
     }
 
-    public void setURLVideo(String URLVideo) {
-        this.URLVideo = URLVideo;
+    public void setVideo(String URLVideo) {
+        this.video = URLVideo;
     }
 
     public String getUbicacion() {
@@ -73,20 +81,12 @@ public class Reporte implements Comparable<Reporte> {
         this.ubicacion = ubicacion;
     }
 
-    public String getUbicacionGoogleMaps() {
-        return ubicacionGoogleMaps;
+    public String getNombreUsuarioCrea() {
+        return nombreUsuarioCrea;
     }
 
-    public void setUbicacionGoogleMaps(String ubicacionGoogleMaps) {
-        this.ubicacionGoogleMaps = ubicacionGoogleMaps;
-    }
-
-    public String getNombreusuarioCrea() {
-        return nombreusuarioCrea;
-    }
-
-    public void setNombreusuarioCrea(String nombreusuarioCrea) {
-        this.nombreusuarioCrea = nombreusuarioCrea;
+    public void setNombreUsuarioCrea(String nombreUsuarioCrea) {
+        this.nombreUsuarioCrea = nombreUsuarioCrea;
     }
 
     public String getIdUsuario() {
@@ -111,6 +111,14 @@ public class Reporte implements Comparable<Reporte> {
 
     public void setLongitud(String longitud) {
         this.longitud = longitud;
+    }
+
+    public String getPendienteAtender() {
+        return pendienteAtender;
+    }
+
+    public void setPendienteAtender(String pendienteAtender) {
+        this.pendienteAtender = pendienteAtender;
     }
 
     @Override

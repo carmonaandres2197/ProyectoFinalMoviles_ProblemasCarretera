@@ -1,5 +1,7 @@
 package com.example.tfmtest.adapters;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,18 +12,25 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tfmtest.R;
+import com.example.tfmtest.interfaces.AdapterListener;
 import com.example.tfmtest.model.Reporte;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ItemAdapter extends
         RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
-    ArrayList<Reporte> reportes;
-
-    public ItemAdapter(ArrayList<Reporte> reportes) {
+    List<Reporte> reportes;
+    AdapterListener adapterListener;
+    public ItemAdapter(List<Reporte> reportes, AdapterListener adapterListener) {
         this.reportes = reportes;
+        this.adapterListener = adapterListener;
         notifyDataSetChanged();
+    }
+
+    public List<Reporte> getReportes() {
+        return reportes;
     }
 
     @NonNull
@@ -36,7 +45,7 @@ public class ItemAdapter extends
     @Override
     public void onBindViewHolder(@NonNull ItemAdapter.ViewHolder holder, int position) {
         holder.lblNombre.setText(reportes.get(position).getNombre());
-        holder.lblUsuarioReporta.setText(reportes.get(position).getIdUsuario());
+        holder.lblUsuarioReporta.setText(reportes.get(position).getNombreUsuarioCrea());
         holder.lblUbicacion.setText(reportes.get(position).getUbicacion());
 
         holder.lblVerVideo.setOnClickListener(v -> {
@@ -44,7 +53,8 @@ public class ItemAdapter extends
         });
 
         holder.lblVerMapa.setOnClickListener(v -> {
-            //TODO
+                adapterListener.openMap(reportes.get(position));
+
         });
 
         holder.linearLayout.setOnClickListener(v -> {
@@ -71,7 +81,7 @@ public class ItemAdapter extends
         return position;
     }
 
-    public void setResults(ArrayList<Reporte> reportes) {
+    public void setResults(List<Reporte> reportes) {
         this.reportes = reportes;
         notifyDataSetChanged();
     }
