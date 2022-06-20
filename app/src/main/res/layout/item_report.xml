@@ -96,6 +96,18 @@
                    android:layout_height="16dp"
                    android:layout_marginStart="10dp"
                    android:layout_marginEnd="2dp"
+                   android:src="@drawable/ic_image"/>
+               <TextView
+                   android:id="@+id/ver_imagen"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="Ver imagen"
+                   android:textColor="@color/black"/>
+               <ImageView
+                   android:layout_width="16dp"
+                   android:layout_height="16dp"
+                   android:layout_marginStart="10dp"
+                   android:layout_marginEnd="2dp"
                    android:src="@drawable/ic_map"/>
                <TextView
                    android:id="@+id/ver_mapa"
@@ -103,6 +115,7 @@
                    android:layout_height="wrap_content"
                    android:text="Ver en el mapa"
                    android:textColor="@color/black"/>
+
            </LinearLayout>
 
 

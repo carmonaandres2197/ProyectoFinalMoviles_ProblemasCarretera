@@ -1,7 +1,5 @@
 package com.example.tfmtest.adapters;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +13,6 @@ import com.example.tfmtest.R;
 import com.example.tfmtest.interfaces.AdapterListener;
 import com.example.tfmtest.model.Reporte;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ItemAdapter extends
@@ -49,7 +46,7 @@ public class ItemAdapter extends
         holder.lblUbicacion.setText(reportes.get(position).getUbicacion());
 
         holder.lblVerVideo.setOnClickListener(v -> {
-            //TODO
+            adapterListener.openVideo(reportes.get(position));
         });
 
         holder.lblVerMapa.setOnClickListener(v -> {
@@ -62,6 +59,13 @@ public class ItemAdapter extends
                 holder.sub_item.setVisibility(View.GONE);
             } else {
                 holder.sub_item.setVisibility(View.VISIBLE);
+            }
+        });
+
+        holder.lblVerImagen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                adapterListener.openImage(reportes.get(position));
             }
         });
     }
@@ -95,6 +99,7 @@ public class ItemAdapter extends
         public TextView lblUbicacion;
         public TextView lblVerVideo;
         public TextView lblVerMapa;
+        public TextView lblVerImagen;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -105,7 +110,7 @@ public class ItemAdapter extends
             lblUbicacion = itemView.findViewById(R.id.ubicacion);
             lblVerVideo = itemView.findViewById(R.id.ver_video);
             lblVerMapa = itemView.findViewById(R.id.ver_mapa);
-
+            lblVerImagen = itemView.findViewById(R.id.ver_imagen);
         }
     }
 }
