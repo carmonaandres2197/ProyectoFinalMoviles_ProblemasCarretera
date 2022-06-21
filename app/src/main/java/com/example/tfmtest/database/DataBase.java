@@ -1,4 +1,4 @@
-package com.example.tfmtest;
+package com.example.tfmtest.database;
 
 import androidx.annotation.NonNull;
 

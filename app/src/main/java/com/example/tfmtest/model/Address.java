@@ -1,4 +1,4 @@
-package classes;
+package com.example.tfmtest.model;
 
 public class Address {
       String canton;

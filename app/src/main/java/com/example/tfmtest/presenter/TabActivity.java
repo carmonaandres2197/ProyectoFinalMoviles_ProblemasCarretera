@@ -1,4 +1,4 @@
-package com.example.tfmtest;
+package com.example.tfmtest.presenter;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -6,6 +6,8 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.tfmtest.view.ListPendientesFragment;
+import com.example.tfmtest.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 

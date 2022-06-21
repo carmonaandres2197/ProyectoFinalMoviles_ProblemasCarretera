@@ -1,4 +1,4 @@
-package classes;
+package com.example.tfmtest.model;
 
 
 import java.util.Date;
