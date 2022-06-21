@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.tfmtest.adapters.ItemAdapter;
+import com.example.tfmtest.adapters.ReportsListAdapter;
 import com.example.tfmtest.interfaces.AdapterListener;
 import com.example.tfmtest.interfaces.Callback;
 import com.example.tfmtest.model.Reporte;
@@ -23,32 +23,31 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class ListPendientesFragment extends Fragment implements AdapterListener {
+public class ListReportsFragment extends Fragment {
 
     private List<Reporte> reportes;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
-    private ItemAdapter itemAdapter;
+    private ReportsListAdapter itemAdapter;
     private DataBase dataBase;
+
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.list_pendientes_activity,
+        View view = inflater.inflate(R.layout.activity_second,
                 container, false);
 
-        recyclerView = view.findViewById(R.id.list_pendientes);
+        recyclerView = view.findViewById(R.id.recycler1);
         reportes = new ArrayList<>();
 
-        itemAdapter = new ItemAdapter(reportes,this);
+        itemAdapter = new ReportsListAdapter(getContext(),reportes);
         dataBase = new DataBase();
         recyclerView.setAdapter(itemAdapter);
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         itemAdapter.setResults(reportes);
         cargarDatos();
-
-          return view;
-
+        return view;
     }
 
     public void cargarDatos() {
@@ -85,36 +84,5 @@ public class ListPendientesFragment extends Fragment implements AdapterListener 
         });
     }
 
-    @Override
-    public void openMap(Reporte reporte) {
-        try {
-            if (reporte.getLatitud() != null && reporte.getLongitud() != null
-                    && !reporte.getLatitud().equals("") && !reporte.getLongitud().equals("")) {
-                Uri gmmIntentUri = Uri.parse("geo:" + reporte.getLatitud() + "," + reporte.getLongitud());
-                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-                mapIntent.setPackage("com.google.android.apps.maps");
-                if (mapIntent.resolveActivity(getActivity().getPackageManager()) != null) {
-                    startActivity(mapIntent);
-                }
-            } else {
-                Toast.makeText(getActivity(),"El reporte no tiene las coordenadas",Toast.LENGTH_SHORT).show();
-            }
-        } catch (Exception e) {
-            Toast.makeText(getActivity(),"Ocurrio un error",Toast.LENGTH_SHORT).show();
-        }
-    }
 
-    @Override
-    public void openVideo(Reporte reporte) {
-        Intent intent = new Intent(getActivity(), ImagenVideoActivity.class);
-        intent.putExtra("video", reporte.getVideo());
-        intent.putExtra("isVideo", true);
-    }
-
-    @Override
-    public void openImage(Reporte reporte) {
-        Intent intent = new Intent(getActivity(), ImagenVideoActivity.class);
-        intent.putExtra("imagen", reporte.getImagen());
-        intent.putExtra("isImagen", true);
-    }
 }
