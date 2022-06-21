@@ -74,9 +74,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
     void navigateToSecondActivity(){
-        finish();
+
         Intent intent = new Intent(MainActivity.this,SecondActivity.class);
         startActivity(intent);
+        finish();
     }
 
     public void navigateEditCreateEvent(View view) {
@@ -84,57 +85,4 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-//    /*Metodos para prueba*/
-//    public void botonParaAbrirTabActivity(){
-//        Button button = findViewById(R.id.loginbtn);
-//        button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                finish();
-//                Intent intent = new Intent(MainActivity.this,TabActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-//    }
-//    /*Metodos para prueba*/
-//    public void testInsertUpdateData(){
-//        DataBase dataBase = new DataBase();
-//
-//        Reporte reporte = new Reporte();
-//        reporte.setIdReporte(UUID.randomUUID().toString().replace("-","").toLowerCase(Locale.ROOT));
-//        reporte.setEstado(true);
-//        reporte.setNombre("Prueba 4");
-//        reporte.setFecha(new Date());
-//        reporte.setLatitud("9.634256");
-//        reporte.setLongitud("-83.996543");
-//        reporte.setNombreUsuarioCrea("Ricardo");
-//        reporte.setUbicacion("Alajuela, Costa Rica");
-//
-//        //Registrar
-//        dataBase.agregarRegistro(reporte,reporte.getIdReporte(), new Callback<Void>(){
-//
-//            @Override
-//            public void onSucces(Void result) {
-//                Log.i("Firestore", "Registro exitoso");
-//            }
-//
-//            @Override
-//            public void onFailed(Exception e) {
-//                Log.i("Firestore", "Ocurrio un error " + e.getMessage());
-//            }
-//        });
-//
-//        //Actualizar
-////        dataBase.actualizarReporte(reporte, new Callback<Reporte>() {
-////            @Override
-////            public void onSucces(Reporte result) {
-////                Log.i("Firestore", "Registro actualizado");
-////            }
-////
-////            @Override
-////            public void onFailed(Exception e) {
-////                Log.i("Firestore",  "Ocurrio un error " + e.getMessage());
-////            }
-////        });
-//    }
 }
