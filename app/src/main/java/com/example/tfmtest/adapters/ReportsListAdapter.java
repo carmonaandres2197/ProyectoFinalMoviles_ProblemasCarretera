@@ -20,21 +20,17 @@ import java.util.List;
 public class ReportsListAdapter extends RecyclerView.Adapter<ReportsListAdapter.ReportViewHolder> {
 
     private List<Reporte> mReports; // Cached copy of words
-    //private final LayoutInflater mInflater;
-   // AdapterListener adapterListener;
-    private final LayoutInflater mInflater;
+
     private ListReportsFragment listReportsFragment;
 
-    public void setListReportsFragment(ListReportsFragment listReportsFragment) {
-        this.listReportsFragment = listReportsFragment;
-    }
-    public ReportsListAdapter(Context context, List<Reporte> reportes) {
-      //  mInflater = LayoutInflater.from(context);
+
+    public ReportsListAdapter(List<Reporte> reportes) {
         this.mReports = reportes;
-        mInflater = LayoutInflater.from(context);
-       // this.adapterListener = adapterListener;
         notifyDataSetChanged();
 
+    }
+    public void setListReportsFragment(ListReportsFragment listReportsFragment) {
+        this.listReportsFragment = listReportsFragment;
     }
 
     public List<Reporte> getReportes() {
@@ -44,7 +40,9 @@ public class ReportsListAdapter extends RecyclerView.Adapter<ReportsListAdapter.
     @NonNull
     @Override
     public ReportsListAdapter.ReportViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View item = mInflater.inflate(R.layout.reporte, parent,false);
+        View item = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_report_dh, parent, false);
+
         return new ReportViewHolder(item);
     }
 
@@ -53,19 +51,11 @@ public class ReportsListAdapter extends RecyclerView.Adapter<ReportsListAdapter.
         final Reporte report = mReports.get(position);
         holder.lblNombre.setText(mReports.get(position).getNombre());
         //holder.nombreHueco.setText(mReports.get(position).getNombre());
-        holder.fecha.setText((CharSequence) mReports.get(position).getFecha());
+       // holder.fecha.setText((CharSequence) mReports.get(position).getFecha());
         holder.severidad.setText(mReports.get(position).getSeveridad());
 
-//        holder.itemView.setOnClickListener(new OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                view.setOnClickListener(this);
-//                notifyDataSetChanged();
-//
-//            }
-//        });
-
         listReportsFragment.cargarDatos();
+
         notifyDataSetChanged();
 
         holder.linearLayout.setOnClickListener(v -> {
@@ -102,7 +92,7 @@ public class ReportsListAdapter extends RecyclerView.Adapter<ReportsListAdapter.
         public LinearLayout sub_item;
         public TextView lblNombre;
        // public TextView nombreHueco;
-        public TextView fecha;
+      //  public TextView fecha;
         public TextView severidad;
         //   public TextView estado;
 
@@ -113,14 +103,11 @@ public class ReportsListAdapter extends RecyclerView.Adapter<ReportsListAdapter.
             sub_item = itemView.findViewById(R.id.sub_itemm);
             lblNombre = itemView.findViewById(R.id.nombree);
             //nombreHueco = itemView.findViewById(R.id.nombrehueco);
-            fecha = itemView.findViewById(R.id.fecha);
+          //  fecha = itemView.findViewById(R.id.fecha);
             severidad = itemView.findViewById(R.id.severidad);
              //estado = itemView.findViewById(R.id.estadohueco);
 
         }
     }
-
 }
-
-
 

@@ -1,6 +1,8 @@
 package com.example.tfmtest.presenter;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.tfmtest.adapters.ReportsListAdapter;
 import com.example.tfmtest.view.ListReportsFragment;
 import com.example.tfmtest.R;
 import com.example.tfmtest.model.Reporte;
@@ -33,8 +36,7 @@ public class SecondActivity extends AppCompatActivity{
 
 
     public static final int NEW_DERRUMBE_ACTIVITY_REQUEST_CODE = 1;
-    public static final int NEW_DERRUMBE_LIST_REQUEST_CODE = 1;
-    @Override
+      @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
@@ -55,17 +57,29 @@ public class SecondActivity extends AppCompatActivity{
             email.setText(personEmail);
         }
 
-        signOutBtn.setOnClickListener(new View.OnClickListener() {
+
+
+
+
+            listReportsFragment = new ListReportsFragment();
+         //  listReportsFragment.onCreateView(listReportsF ,savedInstanceState);
+//          RecyclerView recyclerView = findViewById(R.id.recyclerview);
+          ReportsListAdapter adapter = new ReportsListAdapter(reportes);
+//          recyclerView.setAdapter(adapter);
+
+          adapter.setListReportsFragment(listReportsFragment);
+
+       // Intent intent = new Intent(SecondActivity.this, ListReportsFragment.class);
+       //
+
+    //    getSupportFragmentManager().beginTransaction().replace(R.id.containerr, listReportsFragment).commit();
+
+            signOutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 signOut();
             }
         });
-        listReportsFragment = new ListReportsFragment();
-//        Intent intent = new Intent(SecondActivity.this, ListReportsFragment.class);
-//        listReportsFragment.startActivity(intent);
-
-     //  listReportsFragment = getSupportFragmentManager().beginTransaction().replace(R.id.containerr, listReportsFragment).commit();
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
