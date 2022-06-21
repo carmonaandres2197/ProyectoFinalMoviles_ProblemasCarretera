@@ -90,7 +90,7 @@ public class SecondActivity extends AppCompatActivity{
        databaseReference = FirebaseDatabase.getInstance().getReference("Reportes");
           recyclerView = findViewById(R.id.recyclerview);
           reportes = new ArrayList<>();
-
+            // nueva  version
         itemAdapter = new ReportsListAdapter(this, reportes);
         //base = new DataBase();
         recyclerView.setAdapter(itemAdapter);
