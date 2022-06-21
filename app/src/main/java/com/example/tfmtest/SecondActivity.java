@@ -75,10 +75,10 @@ public class SecondActivity extends AppCompatActivity{
             }
         });
         listReportsFragment = new ListReportsFragment();
-        Intent intent = new Intent(SecondActivity.this, ListReportsFragment.class);
-        listReportsFragment.startActivity(intent);
+//        Intent intent = new Intent(SecondActivity.this, ListReportsFragment.class);
+//        listReportsFragment.startActivity(intent);
 
-        //   getSupportFragmentManager().beginTransaction().replace(R.id.container, listPendientesFragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.containerr, listReportsFragment).commit();
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
