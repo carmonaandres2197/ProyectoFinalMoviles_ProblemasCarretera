@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.MediaController;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,8 +20,7 @@ import com.example.tfmtest.utils.Loading;
 import java.io.File;
 
 public class ImagenVideoActivity extends AppCompatActivity {
-    byte[] attachmentByte;
-    String attachmentString, type;
+
     ImageView ivAttachment;
     VideoView videoView;
     int postionMinutes = 0;
@@ -30,17 +30,17 @@ public class ImagenVideoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_image);
         ivAttachment = findViewById(R.id.ivAttachment);
-        videoView = findViewById(R.id.vvAttachment);
+        videoView    = findViewById(R.id.vvAttachment);
 
         Bundle extras = getIntent().getExtras();
+
         if (extras.getBoolean("isVideo")) {
-            type = "video";
             Loading.showLoading(this, "Cargando...");
             ivAttachment.setVisibility(View.GONE);
             videoView.setVisibility(View.VISIBLE);
             MediaController mediaController = new MediaController(ImagenVideoActivity.this);
             mediaController.setAnchorView(videoView);
-            Uri uri = Uri.parse(extras.getString("video"));
+            Uri uri = Uri.fromFile(new File(extras.getString("video")));
 
             videoView.setMediaController(mediaController);
             videoView.setVideoURI(uri);
@@ -68,15 +68,14 @@ public class ImagenVideoActivity extends AppCompatActivity {
             });
 
         } else {
-            type = "image";
-            ivAttachment.setVisibility(View.GONE);
+            ivAttachment.setVisibility(View.VISIBLE);
             videoView.setVisibility(View.GONE);
 
             if (extras.get("imagen") != null) {
                 Uri uri = Uri.fromFile(new File(extras.getString("imagen")));
                 Glide.with(this)
                         .load(uri)
-                        .apply(new RequestOptions().centerCrop())
+                        .apply(new RequestOptions().centerInside())
                         .into(ivAttachment);
                 ivAttachment.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -93,6 +92,8 @@ public class ImagenVideoActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
                 });
+            }else{
+                Toast.makeText(this, "No se pudo mostrar la imagen", Toast.LENGTH_SHORT).show();
             }
         }
     }

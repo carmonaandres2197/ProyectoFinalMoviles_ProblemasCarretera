@@ -29,6 +29,9 @@
         <activity
             android:name=".TabActivity"
             android:exported="false" />
+        <activity
+            android:name=".ImagenVideoActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
