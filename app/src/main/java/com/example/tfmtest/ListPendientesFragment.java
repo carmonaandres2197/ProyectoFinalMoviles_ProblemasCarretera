@@ -51,7 +51,9 @@ public class ListPendientesFragment extends Fragment implements AdapterListener 
         recyclerView.setLayoutManager(layoutManager);
         itemAdapter.setResults(reportes);
         cargarDatos();
-        return view;
+
+          return view;
+
     }
 
     public void cargarDatos() {
