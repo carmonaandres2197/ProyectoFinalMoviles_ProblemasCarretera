@@ -1,30 +1,20 @@
-package com.example.tfmtest;
+package com.example.tfmtest.presenter;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.tfmtest.interfaces.Callback;
-import com.example.tfmtest.model.Reporte;
+import com.example.tfmtest.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseApp;
-
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -86,6 +76,11 @@ public class MainActivity extends AppCompatActivity {
     void navigateToSecondActivity(){
         finish();
         Intent intent = new Intent(MainActivity.this,SecondActivity.class);
+        startActivity(intent);
+    }
+
+    public void navigateEditCreateEvent(View view) {
+        Intent intent = new Intent(MainActivity.this, CreateEditTemplate.class);
         startActivity(intent);
     }
 

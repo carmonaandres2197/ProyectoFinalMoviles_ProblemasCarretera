@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ImagenVideoActivity">
+    tools:context=".presenter.ImagenVideoActivity">
 
     <ImageView
         android:id="@+id/ivAttachment"

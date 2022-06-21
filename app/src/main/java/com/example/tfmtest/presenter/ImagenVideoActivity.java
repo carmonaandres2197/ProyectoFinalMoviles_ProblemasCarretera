@@ -1,4 +1,4 @@
-package com.example.tfmtest;
+package com.example.tfmtest.presenter;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.tfmtest.R;
 import com.example.tfmtest.utils.Loading;
 
 import java.io.File;

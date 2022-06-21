@@ -1,7 +1,5 @@
-package com.example.tfmtest;
+package com.example.tfmtest.view;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,8 +10,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.tfmtest.R;
 import com.example.tfmtest.adapters.ReportsListAdapter;
-import com.example.tfmtest.interfaces.AdapterListener;
+import com.example.tfmtest.database.DataBase;
 import com.example.tfmtest.interfaces.Callback;
 import com.example.tfmtest.model.Reporte;
 import com.example.tfmtest.utils.Loading;

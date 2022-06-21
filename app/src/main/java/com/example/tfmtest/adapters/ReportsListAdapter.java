@@ -5,22 +5,16 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.tfmtest.ListReportsFragment;
+import com.example.tfmtest.view.ListReportsFragment;
 import com.example.tfmtest.R;
-import com.example.tfmtest.interfaces.AdapterListener;
 import com.example.tfmtest.model.Reporte;
 
-import java.util.Collections;
 import java.util.List;
 
 public class ReportsListAdapter extends RecyclerView.Adapter<ReportsListAdapter.ReportViewHolder> {
