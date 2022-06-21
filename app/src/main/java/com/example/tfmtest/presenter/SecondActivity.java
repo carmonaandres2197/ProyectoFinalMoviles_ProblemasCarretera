@@ -10,11 +10,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.tfmtest.adapters.ReportsListAdapter;
 
 import com.example.tfmtest.R;
+import com.example.tfmtest.database.DataBase;
+import com.example.tfmtest.interfaces.Callback;
+import com.example.tfmtest.interfaces.RealtimeDataListener;
 import com.example.tfmtest.model.Reporte;
+import com.example.tfmtest.utils.Loading;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -28,10 +33,17 @@ import com.google.firebase.database.DatabaseReference;
 
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
+import java.io.File;
+import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+
 
 public class SecondActivity extends AppCompatActivity{
 
@@ -44,6 +56,7 @@ public class SecondActivity extends AppCompatActivity{
     List<Reporte> reportes;
     RecyclerView recyclerView;
     ReportsListAdapter itemAdapter;
+    //DataBase base;
     DatabaseReference databaseReference;
     //FirebaseFirestore dataBase;
 
@@ -74,32 +87,37 @@ public class SecondActivity extends AppCompatActivity{
         }
 
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("Reportes");
+       databaseReference = FirebaseDatabase.getInstance().getReference("Reportes");
           recyclerView = findViewById(R.id.recyclerview);
           reportes = new ArrayList<>();
-          recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-          itemAdapter = new ReportsListAdapter(this, reportes);
-          recyclerView.setAdapter(itemAdapter);
+        itemAdapter = new ReportsListAdapter(this, reportes);
+        //base = new DataBase();
+        recyclerView.setAdapter(itemAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        itemAdapter.setResults(reportes);
+
+
           databaseReference.getDatabase();
+         //   cargarDatos();
 
 
-          databaseReference.addValueEventListener(new ValueEventListener() {
-              @Override
-              public void onDataChange(@NonNull DataSnapshot snapshot) {
-                  for(DataSnapshot dataSnapshot: snapshot.getChildren()){
-                      Reporte reporte = dataSnapshot.getValue(Reporte.class);
-                      reportes.add(reporte);
-                  }
-                  itemAdapter.notifyDataSetChanged();
-
-              }
-
-              @Override
-              public void onCancelled(@NonNull DatabaseError error) {
-
-              }
-          });
+//          databaseReference.addValueEventListener(new ValueEventListener() {
+//              @Override
+//              public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                  for(DataSnapshot dataSnapshot: snapshot.getChildren()){
+//                      Reporte reporte = dataSnapshot.getValue(Reporte.class);
+//                      reportes.add(reporte);
+//                  }
+//                  itemAdapter.notifyDataSetChanged();
+//
+//              }
+//
+//              @Override
+//              public void onCancelled(@NonNull DatabaseError error) {
+//
+//              }
+//          });
 
 
 
@@ -132,6 +150,45 @@ public class SecondActivity extends AppCompatActivity{
             }
         });
     }
+
+//        public void cargarDatos() {
+//      //  Loading.showLoading(getActivity(), "Cargando datos");
+//        base.obtenerReportes(new Callback<List<Reporte>>() {
+//            @Override
+//            public void onSucces(List<Reporte> result) {
+//                Collections.sort(result);
+//                reportes = result;
+//                itemAdapter.setResults(result);
+//                Loading.hideLoading();
+//            }
+//
+//            @Override
+//            public void onFailed(Exception e) {
+//                Loading.hideLoading();
+//            }
+//        });
+//
+//        addRealtimeDabaseListener();
+//    }
+//
+//    private void addRealtimeDabaseListener() {
+//        base.listenForUpdatesPendientes(itemAdapter.getReportes(), new RealtimeDataListener<List<Reporte>>() {
+//            @Override
+//            public void onDataChange(List<Reporte> updateData) {
+//                itemAdapter.setResults(updateData);
+//            }
+//
+//            @Override
+//            public void onError(Exception exception) {
+//                Toast.makeText(getBaseContext(), "Ocurrio un error",
+//                        Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//    }
+
+
+
+
 
 
 }
