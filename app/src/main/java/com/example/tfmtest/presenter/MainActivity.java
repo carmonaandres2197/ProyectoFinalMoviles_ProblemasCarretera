@@ -79,6 +79,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void navigateEditCreateEvent(View view) {
+        Intent intent = new Intent(MainActivity.this, CreateEditTemplate.class);
+        startActivity(intent);
+    }
+
 //    /*Metodos para prueba*/
 //    public void botonParaAbrirTabActivity(){
 //        Button button = findViewById(R.id.loginbtn);
