@@ -78,7 +78,7 @@ public class SecondActivity extends AppCompatActivity{
 //        Intent intent = new Intent(SecondActivity.this, ListReportsFragment.class);
 //        listReportsFragment.startActivity(intent);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.containerr, listReportsFragment).commit();
+     //  listReportsFragment = getSupportFragmentManager().beginTransaction().replace(R.id.containerr, listReportsFragment).commit();
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
