@@ -2,164 +2,195 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:name="com.google.android.gms.maps.SupportMapFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fondo"
     tools:context=".presenter.CreateEditTemplate">
 
 
+    <Spinner
+        android:id="@+id/spinner_severidad"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="107dp"
+        android:layout_marginBottom="285dp"
+        android:backgroundTint="@color/gray"
+        android:popupBackground="@color/cardview_dark_background"
+        app:layout_constraintBottom_toTopOf="@+id/buttonVideo"
+        app:layout_constraintEnd_toEndOf="@+id/spinner_provincia"
+        app:layout_constraintStart_toStartOf="@+id/spinner_provincia"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
-        android:id="@+id/Title3"
+        android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="304dp"
-        android:text="Seleccione Ubicacion"
-        android:textColor="@color/black"
-        android:textSize="28dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/sppinerTypeEvent"
-        app:layout_constraintTop_toBottomOf="@+id/sppinerTypeEvent" />
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="14dp"
+        android:text="Severidad"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/spinner_severidad"
+        app:layout_constraintEnd_toEndOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="0dp"
+        android:layout_width="126dp"
         android:layout_height="0dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="41dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="327dp"
-        android:text="Nuevo evento en carretera"
-        android:textColor="@color/black"
+        android:layout_marginStart="121dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginBottom="17dp"
+        android:text="Reporte"
+        android:textColor="@color/white"
         android:textSize="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/idCanton"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textView8"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/editTextTextPersonName"
+    <Spinner
+        android:id="@+id/spinner_provincia"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="43dp"
-        android:layout_marginEnd="43dp"
-        android:layout_marginBottom="34dp"
-        android:ems="10"
-        android:hint="Nombre Evento"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/Title2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-    <TextView
-        android:id="@+id/Title2"
-        android:layout_width="300dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="45dp"
-        android:layout_marginEnd="45dp"
-        android:layout_marginBottom="25dp"
-        android:text="Seleccione Tipo Evento"
-        android:textColor="@color/black"
-        android:textSize="28dp"
-        app:layout_constraintBottom_toTopOf="@+id/sppinerTypeEvent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/gray"
+        android:popupBackground="@color/cardview_dark_background"
+        app:layout_constraintBottom_toTopOf="@+id/textView6"
+        app:layout_constraintEnd_toEndOf="@+id/spinner_canton"
+        app:layout_constraintStart_toStartOf="@+id/spinner_canton"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <Spinner
-        android:id="@+id/sppinerTypeEvent"
-        android:layout_width="314dp"
-        android:layout_height="51dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="35dp"
-        android:background="@color/design_default_color_on_primary"
-        android:outlineSpotShadowColor="@color/black"
-        android:spinnerMode="dropdown"
-        app:layout_constraintBottom_toTopOf="@+id/Title3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Title2" />
-
-    <TextView
-        android:id="@+id/titleProvince"
-        android:layout_width="0dp"
-        android:layout_height="34dp"
-        android:layout_marginStart="43dp"
-        android:layout_marginTop="56dp"
-        android:layout_marginEnd="55dp"
-        android:layout_marginBottom="50dp"
-        android:text="Province"
-        android:textSize="24dp"
-        app:layout_constraintBottom_toBottomOf="@+id/sppinerProvince"
-        app:layout_constraintEnd_toStartOf="@+id/idCanton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/Title3" />
-
-    <TextView
-        android:id="@+id/idCanton"
+        android:id="@+id/spinner_canton"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginEnd="23dp"
-        android:layout_marginBottom="12dp"
-        android:text="Canton"
-        android:textSize="24dp"
-        app:layout_constraintBottom_toTopOf="@+id/spinnerCanton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/titleProvince"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-    <TextView
-        android:id="@+id/idDistrito"
-        android:layout_width="130dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="97dp"
-        android:layout_marginEnd="98dp"
-        android:layout_marginBottom="13dp"
-        android:text="Distrito"
-        android:textSize="24dp"
-        app:layout_constraintBottom_toTopOf="@+id/spinnerDistrito"
-        app:layout_constraintEnd_toEndOf="@+id/spinnerCanton"
-        app:layout_constraintStart_toStartOf="@+id/Title3"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerCanton" />
+        android:layout_marginBottom="14dp"
+        android:backgroundTint="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/textView7"
+        app:layout_constraintEnd_toEndOf="@+id/spinner_distrito"
+        app:layout_constraintStart_toStartOf="@+id/spinner_distrito"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <Spinner
-        android:id="@+id/sppinerProvince"
+        android:id="@+id/spinner_distrito"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="45dp"
-
-        android:layout_marginEnd="49dp"
-        android:background="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/spinnerCanton"
-        app:layout_constraintEnd_toStartOf="@+id/spinnerCanton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/spinnerCanton" />
-
-    <Spinner
-        android:id="@+id/spinnerCanton"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="23dp"
-        android:layout_marginBottom="17dp"
-        android:background="@color/design_default_color_on_primary"
-        app:layout_constraintBottom_toTopOf="@+id/idDistrito"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/sppinerProvince"
-        app:layout_constraintTop_toBottomOf="@+id/idCanton" />
-
-    <Spinner
-        android:id="@+id/spinnerDistrito"
-        android:layout_width="170dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="105dp"
-
-
-        android:layout_marginBottom="90dp"
-        android:background="@color/design_default_color_on_primary"
+        android:layout_marginBottom="325dp"
+        android:backgroundTint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/idDistrito" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="13dp"
+        android:text="Provincia"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/spinner_provincia"
+        app:layout_constraintEnd_toEndOf="@+id/textView7"
+        app:layout_constraintStart_toStartOf="@+id/textView8"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_severidad" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="19dp"
+        android:text="Canton "
+
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/spinner_canton"
+        app:layout_constraintEnd_toEndOf="@+id/textView8"
+        app:layout_constraintStart_toStartOf="@+id/textView7"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_provincia" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="17dp"
+        android:text="Distrito"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/spinner_distrito"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_canton" />
+
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="435dp"
+        android:layout_marginEnd="104dp"
+        android:layout_marginBottom="11dp"
+        android:text="Click here to take picture"
+        android:textSize="12dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintEnd_toStartOf="@+id/buttonVideo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/buttonVideo"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="448dp"
+        android:layout_marginEnd="19dp"
+        android:layout_marginBottom="14dp"
+        android:text="Click here to take Video"
+        android:textSize="12dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_below="@id/button"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="518dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="158dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/simpleVideoView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <VideoView
+        android:id="@+id/simpleVideoView"
+        android:layout_width="0dp"
+        android:layout_height="84dp"
+        android:layout_marginTop="516dp"
+        android:layout_marginEnd="29dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="667dp"
+        android:text="location"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="260dp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
