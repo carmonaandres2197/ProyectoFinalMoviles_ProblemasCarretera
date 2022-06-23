@@ -19,14 +19,6 @@
         android:theme="@style/Theme.TFMTest"
         tools:targetApi="31">
         <activity
-            android:name=".presenter.SelectLocation"
-            android:exported="false" />
-        <activity
-            android:name=".UbicacionActiviidad"
-            android:exported="false"
-            android:label="@string/title_activity_ubicacion_activiidad"
-            android:theme="@style/Theme.TFMTest.NoActionBar" />
-        <activity
             android:name=".presenter.CreateEditTemplate"
             android:exported="false" />
         <activity
