@@ -25,6 +25,7 @@ public class ReportsListAdapter extends RecyclerView.Adapter<ReportsListAdapter.
 
 
     public ReportsListAdapter(Context context,List<Reporte> reportes) {
+        this.context = context;
         this.mReports = reportes;
         notifyDataSetChanged();
 
