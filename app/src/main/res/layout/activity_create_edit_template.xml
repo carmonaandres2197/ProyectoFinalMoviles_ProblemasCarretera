@@ -14,10 +14,10 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="107dp"
-        android:layout_marginBottom="285dp"
+        android:layout_marginBottom="466dp"
         android:backgroundTint="@color/gray"
         android:popupBackground="@color/cardview_dark_background"
-        app:layout_constraintBottom_toTopOf="@+id/buttonVideo"
+        app:layout_constraintBottom_toTopOf="@+id/btnGetLocation"
         app:layout_constraintEnd_toEndOf="@+id/spinner_provincia"
         app:layout_constraintStart_toStartOf="@+id/spinner_provincia"
         app:layout_constraintTop_toTopOf="parent" />
@@ -156,7 +156,8 @@
         app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/button"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -165,32 +166,42 @@
         android:layout_below="@id/button"
         android:layout_marginStart="13dp"
         android:layout_marginTop="518dp"
-        android:layout_marginEnd="50dp"
         android:layout_marginBottom="158dp"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/simpleVideoView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <VideoView
-        android:id="@+id/simpleVideoView"
-        android:layout_width="0dp"
-        android:layout_height="84dp"
-        android:layout_marginTop="516dp"
-        android:layout_marginEnd="29dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/longitude"
+        android:layout_width="157dp"
+        android:layout_height="29dp"
+        android:text="-65.0849"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="680dp" />
+
+    <TextView
+        android:id="@+id/latitude"
+        android:layout_width="157dp"
+        android:layout_height="32dp"
+        android:text="38.4219983333"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="217dp"
+        tools:layout_editor_absoluteY="683dp" />
 
     <Button
-        android:id="@+id/location"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="667dp"
-        android:text="location"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="260dp" />
+        android:id="@+id/btnGetLocation"
+        android:layout_width="196dp"
+        android:layout_height="45dp"
+        android:onClick="getLocation"
+        android:text="Get Location"
+        tools:layout_editor_absoluteX="107dp"
+        tools:layout_editor_absoluteY="573dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

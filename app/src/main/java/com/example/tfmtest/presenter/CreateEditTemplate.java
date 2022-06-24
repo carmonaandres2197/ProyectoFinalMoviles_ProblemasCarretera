@@ -1,21 +1,31 @@
 package com.example.tfmtest.presenter;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import com.example.tfmtest.JsonProvincias.GpsTracker;
 import com.example.tfmtest.R;
 
 public class CreateEditTemplate  extends AppCompatActivity {
@@ -24,10 +34,12 @@ public class CreateEditTemplate  extends AppCompatActivity {
 
     ImageView imageView;
     VideoView videoView;
+    Bitmap yourBitmap ;
     public static final int RequestPermissionCode = 1;
     static final int REQUEST_VIDEO_CAPTURE = 1;
-
-
+//location
+    private GpsTracker gpsTracker;
+    private TextView tvLatitude,tvLongitude;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -36,8 +48,11 @@ public class CreateEditTemplate  extends AppCompatActivity {
         setContentView(R.layout.activity_create_edit_template);
 
         btnTakePhoto = findViewById(R.id.button);
-        imageView = findViewById(R.id.imageView);
-        videoView = findViewById((R.id.simpleVideoView));
+        imageView = findViewById(R.id.ver_image);
+        videoView = findViewById((R.id.play_video));
+
+
+
         EnableRuntimePermission();
         btnTakePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,6 +61,7 @@ public class CreateEditTemplate  extends AppCompatActivity {
                 startActivityForResult(intent, 7);
             }
         });
+//image view
 
 
 
@@ -61,6 +77,19 @@ public class CreateEditTemplate  extends AppCompatActivity {
             }
         });
 
+        //location
+        tvLatitude = (TextView)findViewById(R.id.latitude);
+        tvLongitude = (TextView)findViewById(R.id.longitude);
+
+        try {
+            if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
+                ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 101);
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+
     }
 
 
@@ -70,6 +99,7 @@ public class CreateEditTemplate  extends AppCompatActivity {
         if (requestCode == 7 && resultCode == RESULT_OK) {
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
             imageView.setImageBitmap(bitmap);
+            yourBitmap=bitmap;
         }
         if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == RESULT_OK) {
             Uri videoUri = data.getData();
@@ -99,4 +129,26 @@ public class CreateEditTemplate  extends AppCompatActivity {
                 break;
         }
     }
+
+
+
+
+    public void getLocation(View view){
+        gpsTracker = new GpsTracker(CreateEditTemplate.this);
+        if(gpsTracker.canGetLocation()){
+            double latitude = gpsTracker.getLatitude();
+            double longitude = gpsTracker.getLongitude();
+            tvLatitude.setText(String.valueOf(latitude));
+            tvLongitude.setText(String.valueOf(longitude));
+        }else{
+            gpsTracker.showSettingsAlert();
+        }
+    }
+
+    public void resizeImage (View view) {
+        Bitmap resized = Bitmap. createScaledBitmap ( yourBitmap , 400 , 400 , true ) ;
+        imageView .setImageBitmap(resized) ;
+    }
+
+
 }
