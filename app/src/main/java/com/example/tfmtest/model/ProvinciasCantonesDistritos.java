@@ -18,129 +18,139 @@ public class ProvinciasCantonesDistritos {
         provincias.put("6", "Puntarenas");
         provincias.put("7", "Limón");
     }
-    public HashMap<String, String[]> scantones() {
-        HashMap<String, String[]> provincias = new HashMap<String, String[]>();
-        provincias.put("1",cantones1sj());
-        provincias.put("2",cantonesAl2());
-        provincias.put("3",cantonesH1());
-        provincias.put("4",cantonesC1());
-        provincias.put("5",cantonesG1());
-        provincias.put("6",cantonesP1());
-        provincias.put("7",cantonesL1());
+    public HashMap<Integer, String[]> scantones() {
+        HashMap<Integer, String[]> provincias = new HashMap<Integer, String[]>();
+        provincias.put(1,cantones1sj());
+        provincias.put(2,cantonesAl2());
+        provincias.put(3,cantonesC1());
+        provincias.put(4,cantonesH1());
+        provincias.put(5,cantonesG1());
+        provincias.put(6,cantonesP1());
+        provincias.put(7,cantonesL1());
         return provincias;
     }
-    public HashMap<String, String[]>  distritosSJ() {
-        HashMap<String, String[]> distrito = new HashMap<String, String[]>();
-        distrito.put("1",distritos1sj());
-        distrito.put("2",distritos2sj());
-        distrito.put("3",distritos3sj());
-        distrito.put("4",distritos4sj());
-        distrito.put("5",distritos5sj());
-        distrito.put("6",distritos6sj());
-        distrito.put("7",distritos7sj());
-        distrito.put("8",distritos8sj());
-        distrito.put("9",distritos9sj());
-        distrito.put("10",distritos10sj());
-        distrito.put("11",distritos11sj());
-        distrito.put("12",distritos12sj());
-        distrito.put("13",distritos13sj());
-        distrito.put("14",distritos14sj());
-        distrito.put("15",distritos15sj());
-        distrito.put("16",distritos16sj());
-        distrito.put("17",distritos17sj());
-        distrito.put("18",distritos18sj());
-        distrito.put("19",distritos19sj());
-        distrito.put("20",distritos20sj());
+    public HashMap<Integer, HashMap<Integer, String[]> > scantonesDist() {
+        HashMap<Integer, HashMap<Integer, String[]> >  provincias = new HashMap<Integer, HashMap<Integer, String[]>>();
+        provincias.put(1,distritosSJ());
+        provincias.put(2,distritosAl());
+        provincias.put(3,distritosCa());
+        provincias.put(4,distritosHe());
+        provincias.put(5,distritosGu());
+        provincias.put(6,distritosPu());
+        provincias.put(7,distritosLi());
+        return provincias;
+    }
+    public HashMap<Integer, String[]>  distritosSJ() {
+        HashMap<Integer, String[]>  distrito = new HashMap<Integer, String[]> ();
+        distrito.put(1,distritos1sj());
+        distrito.put(2,distritos2sj());
+        distrito.put(3,distritos3sj());
+        distrito.put(4,distritos4sj());
+        distrito.put(5,distritos5sj());
+        distrito.put(6,distritos6sj());
+        distrito.put(7,distritos7sj());
+        distrito.put(8,distritos8sj());
+        distrito.put(9,distritos9sj());
+        distrito.put(10,distritos10sj());
+        distrito.put(11,distritos11sj());
+        distrito.put(12,distritos12sj());
+        distrito.put(13,distritos13sj());
+        distrito.put(14,distritos14sj());
+        distrito.put(15,distritos15sj());
+        distrito.put(16,distritos16sj());
+        distrito.put(17,distritos17sj());
+        distrito.put(18,distritos18sj());
+        distrito.put(19,distritos19sj());
+        distrito.put(20,distritos20sj());
         return distrito;
 
     }
-    public HashMap<String, String[]>  distritosAl() {
-        HashMap<String, String[]> distrito = new HashMap<String, String[]>();
-        distrito.put("1", distritosAl1());
-        distrito.put("2", distritosAl2());
-        distrito.put("3", distritosAl3());
-        distrito.put("4", distritosAl4());
-        distrito.put("5", distritosAl5());
-        distrito.put("6", distritosAl6());
-        distrito.put("7", distritosAl7());
-        distrito.put("8", distritosAl8());
-        distrito.put("9", distritosAl9());
-        distrito.put("10", distritosAl10());
-        distrito.put("11", distritosAl11());
-        distrito.put("12", distritosAl12());
-        distrito.put("13", distritosAl13());
-        distrito.put("14", distritosAl14());
-        distrito.put("15", distritosAl15());
-        distrito.put("16", distritosAl16());
+    public HashMap<Integer, String[]>  distritosAl() {
+        HashMap<Integer, String[]> distrito = new HashMap<Integer, String[]>();
+        distrito.put(1, distritosAl1());
+        distrito.put(2, distritosAl2());
+        distrito.put(3, distritosAl3());
+        distrito.put(4, distritosAl4());
+        distrito.put(5, distritosAl5());
+        distrito.put(6, distritosAl6());
+        distrito.put(7, distritosAl7());
+        distrito.put(8, distritosAl8());
+        distrito.put(9, distritosAl9());
+        distrito.put(10, distritosAl10());
+        distrito.put(11, distritosAl11());
+        distrito.put(12, distritosAl12());
+        distrito.put(13, distritosAl13());
+        distrito.put(14, distritosAl14());
+        distrito.put(15, distritosAl15());
+        distrito.put(16, distritosAl16());
         return distrito;
     }
-    public HashMap<String, String[]>  distritosCa() {
-        HashMap<String, String[]> distrito = new HashMap<String, String[]>();
-        distrito.put("1",distritosC1());
-        distrito.put("2",distritosC2());
-        distrito.put("3",distritosC3());
-        distrito.put("4",distritosC4());
-        distrito.put("5",distritosC5());
-        distrito.put("6",distritosC6());
-        distrito.put("7",distritosC7());
-        distrito.put("8",distritosC8());
+    public HashMap<Integer, String[]>  distritosCa() {
+        HashMap<Integer, String[]> distrito = new HashMap<Integer, String[]>();
+        distrito.put(1,distritosC1());
+        distrito.put(2,distritosC2());
+        distrito.put(3,distritosC3());
+        distrito.put(4,distritosC4());
+        distrito.put(5,distritosC5());
+        distrito.put(6,distritosC6());
+        distrito.put(7,distritosC7());
+        distrito.put(8,distritosC8());
         return distrito;
     }
-    public HashMap<String, String[]>  distritosHe() {
-        HashMap<String, String[]> distrito = new HashMap<String, String[]>();
-        distrito.put("1",distritosH1());
-        distrito.put("2",distritosH2());
-        distrito.put("3",distritosH3());
-        distrito.put("4",distritosH4());
-        distrito.put("5",distritosH5());
-        distrito.put("6",distritosH6());
-        distrito.put("7",distritosH7());
-        distrito.put("8",distritosH8());
-        distrito.put("9",distritosH9());
-        distrito.put("10",distritosH10());
+    public HashMap<Integer, String[]>  distritosHe() {
+        HashMap<Integer, String[]> distrito = new HashMap<Integer, String[]>();
+        distrito.put(1,distritosH1());
+        distrito.put(2,distritosH2());
+        distrito.put(3,distritosH3());
+        distrito.put(4,distritosH4());
+        distrito.put(5,distritosH5());
+        distrito.put(6,distritosH6());
+        distrito.put(7,distritosH7());
+        distrito.put(8,distritosH8());
+        distrito.put(9,distritosH9());
+        distrito.put(10,distritosH10());
         return distrito;
     }
-    public HashMap<String, String[]>  distritosGu() {
-        HashMap<String, String[]> distrito = new HashMap<String, String[]>();
-        distrito.put("1",distritosG1());
-        distrito.put("2",distritosG2());
-        distrito.put("3",distritosG3());
-        distrito.put("4",distritosG4());
-        distrito.put("5",distritosG5());
-        distrito.put("6",distritosG6());
-        distrito.put("7",distritosG7());
-        distrito.put("8",distritosG8());
-        distrito.put("9",distritosG9());
-        distrito.put("10",distritosG10());
-        distrito.put("11",distritosG11());
+    public HashMap<Integer, String[]>  distritosGu() {
+        HashMap<Integer, String[]> distrito = new HashMap<Integer, String[]>();
+        distrito.put(1,distritosG1());
+        distrito.put(2,distritosG2());
+        distrito.put(3,distritosG3());
+        distrito.put(4,distritosG4());
+        distrito.put(5,distritosG5());
+        distrito.put(6,distritosG6());
+        distrito.put(7,distritosG7());
+        distrito.put(8,distritosG8());
+        distrito.put(9,distritosG9());
+        distrito.put(10,distritosG10());
+        distrito.put(11,distritosG11());
         return distrito;
     }
-    public HashMap<String, String[]>  distritosPu() {
-        HashMap<String, String[]> distrito = new HashMap<String, String[]>();
-        distrito.put("1",distritosP1());
-        distrito.put("2",distritosP2());
-        distrito.put("3",distritosP3());
-        distrito.put("4",distritosP4());
-        distrito.put("5",distritosP5());
-        distrito.put("6",distritosP6());
-        distrito.put("7",distritosP7());
-        distrito.put("8",distritosP8());
-        distrito.put("9",distritosP9());
-        distrito.put("10",distritosP10());
-        distrito.put("11",distritosP11());
+    public HashMap<Integer, String[]>  distritosPu() {
+        HashMap<Integer, String[]> distrito = new HashMap<Integer, String[]>();
+        distrito.put(1,distritosP1());
+        distrito.put(2,distritosP2());
+        distrito.put(3,distritosP3());
+        distrito.put(4,distritosP4());
+        distrito.put(5,distritosP5());
+        distrito.put(6,distritosP6());
+        distrito.put(7,distritosP7());
+        distrito.put(8,distritosP8());
+        distrito.put(9,distritosP9());
+        distrito.put(10,distritosP10());
+        distrito.put(11,distritosP11());
         return distrito;
     }
-    public HashMap<String, String[]>  distritosLi() {
-        HashMap<String, String[]> distrito = new HashMap<String, String[]>();
-        distrito.put("1",distritosL1());
-        distrito.put("2",distritosL2());
-        distrito.put("3",distritosL3());
-        distrito.put("4",distritosL4());
-        distrito.put("5",distritosL5());
-        distrito.put("6",distritosL6());
+    public HashMap<Integer, String[]>  distritosLi() {
+        HashMap<Integer, String[]> distrito = new HashMap<Integer, String[]>();
+        distrito.put(1,distritosL1());
+        distrito.put(2,distritosL2());
+        distrito.put(3,distritosL3());
+        distrito.put(4,distritosL4());
+        distrito.put(5,distritosL5());
+        distrito.put(6,distritosL6());
         return distrito;
     }
-
 
     public String[] provincias() {
         String lprovincias[] = {"San José", "Alajuela", "Cartago", "Heredia", "Guanacaste", "Puntarenas", "Limón"};
@@ -718,7 +728,8 @@ public class ProvinciasCantonesDistritos {
 
 
     public String[] cantonesL1(){//Limón
-        String lcantones[] = {//Central","Pococí",
+        String lcantones[] = {//
+                "Central","Pococí",
             "Siquirres","Talamanca","Matina","Guácimo"
         };
         return lcantones;
