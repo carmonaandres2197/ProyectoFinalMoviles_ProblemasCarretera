@@ -7,18 +7,25 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.icu.text.Transliterator;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.example.tfmtest.R;
+import com.example.tfmtest.model.ProvinciasCantonesDistritos;
 
-public class CreateEditTemplate  extends AppCompatActivity {
+import java.util.HashMap;
+
+public class CreateEditTemplate  extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     Button btnTakePhoto;
     Button btnTakeVideo;
 
@@ -27,7 +34,10 @@ public class CreateEditTemplate  extends AppCompatActivity {
     public static final int RequestPermissionCode = 1;
     static final int REQUEST_VIDEO_CAPTURE = 1;
 
-
+    ProvinciasCantonesDistritos pcdlist;
+    Spinner spProvincia,spCanton, spDistrito, spSeveridad;
+    ArrayAdapter<String> adProvincia,adCanton, adDistrito ,adSeveridad;
+    String[] sevelist= {"Alta", "Media", "Baja"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -46,9 +56,6 @@ public class CreateEditTemplate  extends AppCompatActivity {
                 startActivityForResult(intent, 7);
             }
         });
-
-
-
         btnTakeVideo = findViewById(R.id.buttonVideo);
         btnTakeVideo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +67,22 @@ public class CreateEditTemplate  extends AppCompatActivity {
 
             }
         });
+       //spinners
+        pcdlist = new ProvinciasCantonesDistritos();
+        spProvincia=(Spinner)findViewById(R.id.spinner_provincia);
+        spProvincia.setOnItemSelectedListener(this);
+        spCanton=(Spinner)findViewById(R.id.spinner_canton);
+        spCanton.setOnItemSelectedListener(this);
+        spDistrito=(Spinner)findViewById(R.id.spinner_distrito);
+        spDistrito.setOnItemSelectedListener(this);
+        spSeveridad=(Spinner)findViewById(R.id.spinner_severidad);
+        spSeveridad.setOnItemSelectedListener(this);
+
+        //adProvincia,adCanton, adDistrito;
+        adSeveridad= new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, sevelist);
+        spSeveridad.setAdapter(adSeveridad);
+        adProvincia= new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, pcdlist.provincias());
+        spProvincia.setAdapter(adProvincia);
 
     }
 
@@ -98,5 +121,45 @@ public class CreateEditTemplate  extends AppCompatActivity {
                 }
                 break;
         }
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+
+        switch (parent.getId()) {
+            case R.id.spinner_provincia:
+            {
+                String[] list = pcdlist.scantones().get(position + 1);
+                adCanton = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
+                spCanton.setAdapter(adCanton);
+                adCanton.notifyDataSetChanged();
+            }
+                break;
+            case R.id.spinner_canton:
+            {
+                int iPospv = spProvincia.getSelectedItemPosition();
+                int iPosCan = spCanton.getSelectedItemPosition();
+                HashMap<Integer, String[]> distritos = pcdlist.scantonesDist().get(iPospv +1);
+                String[] list =distritos.get(iPosCan + 1);
+                adDistrito = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
+                spDistrito.setAdapter(adDistrito);
+                adDistrito.notifyDataSetChanged();
+            }
+                break;
+            case R.id.spinner_distrito:
+//                    Toast.makeText(this,"pos:"+p,Toast.LENGTH_LONG).show();
+
+            case R.id.spinner_severidad:
+//                    Toast.makeText(this,"pos:"+p,Toast.LENGTH_LONG).show();
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + parent.getId());
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }
