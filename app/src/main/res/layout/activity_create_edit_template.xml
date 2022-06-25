@@ -20,7 +20,9 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
-        android:id="@+id/spinner_tipoReporte"
+
+        android:spinnerMode="dropdown"
+        android:id="@+id/spinner_severidad"
         android:layout_width="166dp"
         android:layout_height="37dp"
         android:layout_marginTop="107dp"
@@ -35,7 +37,7 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <Spinner
-        android:id="@+id/spinner_severidad2"
+        android:id="@+id/spinner_tipoReporte"
         android:layout_width="160dp"
         android:layout_height="35dp"
         android:layout_marginTop="107dp"
@@ -86,19 +88,19 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
-        android:id="@+id/spinner_provincia"
+        android:id="@+id/spinner_canton"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginTop="76dp"
         android:backgroundTint="@color/gray"
         android:popupBackground="@color/cardview_dark_background"
-        app:layout_constraintEnd_toEndOf="@+id/spinner_canton"
+        app:layout_constraintEnd_toEndOf="@+id/spinner_provincia"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/spinner_canton"
+        app:layout_constraintStart_toStartOf="@+id/spinner_provincia"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <Spinner
-        android:id="@+id/spinner_canton"
+        android:id="@+id/spinner_provincia"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginBottom="564dp"

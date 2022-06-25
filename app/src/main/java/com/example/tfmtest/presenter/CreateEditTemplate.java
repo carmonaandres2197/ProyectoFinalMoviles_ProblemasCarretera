@@ -52,9 +52,10 @@ public class CreateEditTemplate  extends AppCompatActivity implements AdapterVie
     private GpsTracker gpsTracker;
     private TextView tvLatitude,tvLongitude;
     ProvinciasCantonesDistritos pcdlist;
-    Spinner spProvincia,spCanton, spDistrito, spSeveridad;
-    ArrayAdapter<String> adProvincia,adCanton, adDistrito ,adSeveridad;
+    Spinner spProvincia,spCanton, spDistrito, spSeveridad,sptipoReporte;
+    ArrayAdapter<String> adProvincia,adCanton, adDistrito ,adSeveridad, adTipoReporte ;
     String[] sevelist= {"Alta", "Media", "Baja"};
+    String[] tipolist= {"Derrumbe", "Hueco"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,14 +91,20 @@ public class CreateEditTemplate  extends AppCompatActivity implements AdapterVie
         spCanton.setOnItemSelectedListener(this);
         spDistrito=(Spinner)findViewById(R.id.spinner_distrito);
         spDistrito.setOnItemSelectedListener(this);
-        spSeveridad=(Spinner)findViewById(R.id.spinner_severidad2);
+        spSeveridad=(Spinner)findViewById(R.id.spinner_severidad);
         spSeveridad.setOnItemSelectedListener(this);
+        sptipoReporte=(Spinner)findViewById(R.id.spinner_tipoReporte);
+        sptipoReporte.setOnItemSelectedListener(this);
 
         //adProvincia,adCanton, adDistrito;
         adSeveridad= new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, sevelist);
         spSeveridad.setAdapter(adSeveridad);
         adProvincia= new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, pcdlist.provincias());
         spProvincia.setAdapter(adProvincia);
+
+        //Tipo Reporte
+        adTipoReporte = new ArrayAdapter<String>(this,  android.R.layout.simple_spinner_item, tipolist);
+        sptipoReporte.setAdapter(adTipoReporte);
 
         //location
         tvLatitude = (TextView)findViewById(R.id.latitude);
@@ -156,14 +163,20 @@ public class CreateEditTemplate  extends AppCompatActivity implements AdapterVie
             gpsTracker.showSettingsAlert();
         }
     }
-    public void resizeImage (View view) {
-        Bitmap resized = Bitmap. createScaledBitmap ( yourBitmap , 400 , 400 , true ) ;
-        imageView .setImageBitmap(resized) ;
-    }
+
     public  void playVideo (View view){
         videoView.start();
     }
     public  void saveReport() {
+
+        // creating a variable for our
+        // Firebase Database.
+        FirebaseDatabase firebaseDatabase;
+
+        // creating a variable for our Database
+        // Reference for Firebase.
+        DatabaseReference databaseReference;
+
         DataBase db = new DataBase();
         Reporte reporte = new Reporte();
         reporte.setIdReporte("23444");
@@ -211,7 +224,11 @@ public class CreateEditTemplate  extends AppCompatActivity implements AdapterVie
             case R.id.spinner_distrito:
 //                    Toast.makeText(this,"pos:"+p,Toast.LENGTH_LONG).show();
 
-            case R.id.spinner_severidad2:
+            case R.id.spinner_severidad:
+//                    Toast.makeText(this,"pos:"+p,Toast.LENGTH_LONG).show();
+                break;
+
+            case R.id.spinner_tipoReporte:
 //                    Toast.makeText(this,"pos:"+p,Toast.LENGTH_LONG).show();
                 break;
             default:
