@@ -139,12 +139,16 @@ public class SecondActivity extends AppCompatActivity{
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) { /// aca se agrega la activity a  donde se agregar los dmbes de la parte de christian
-                Intent intent = new Intent(SecondActivity.this, TabActivity.class);
-                startActivityForResult(intent, NEW_DERRUMBE_ACTIVITY_REQUEST_CODE);
+                navigateEditCreateEvent(view);
             }
         });
 
 
+    }
+
+    public void navigateEditCreateEvent(View view) {
+        Intent intent = new Intent(SecondActivity.this, CreateEditTemplate.class);
+        startActivity(intent);
     }
 
     void signOut(){
