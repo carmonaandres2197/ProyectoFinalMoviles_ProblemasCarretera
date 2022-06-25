@@ -15,17 +15,24 @@ import android.widget.TextView;
 import com.example.tfmtest.R;
 import com.example.tfmtest.model.Reporte;
 
+import java.util.Date;
 import java.util.List;
 
 public class ReportsListAdapter extends RecyclerView.Adapter<ReportsListAdapter.ReportViewHolder> {
     Context  context;
-    private List<Reporte> mReports; // Cached copy of words
+    //private List<Reporte> mReports; // Cached copy of words
+
+    String[] nombres = {"Cobano, Pun, 100 mts sur cancha", "Mts Oca, SJ, Frente a Iglesia", "Cahuita, Lim, 50 mts este del parque"};
+    Date[] fechas = {new Date(), new Date(), new Date()};
+    String[] severidad = {"Baja", "Media", "Alta"};
+    Boolean[] estado = {true, false, true};
 
   //  private ListReportsFragment listReportsFragment;
 
 
-    public ReportsListAdapter(Context context,List<Reporte> reportes) {
-        this.mReports = reportes;
+    public ReportsListAdapter(Context context) {
+        //this.mReports = reportes;
+        this.context = context;
         notifyDataSetChanged();
 
     }
@@ -33,30 +40,29 @@ public class ReportsListAdapter extends RecyclerView.Adapter<ReportsListAdapter.
 //        this.listReportsFragment = listReportsFragment;
 //    }
 
-    public List<Reporte> getReportes() {
+    /*public List<Reporte> getReportes() {
         return mReports;
-    }
+    }*/
 
     @NonNull
     @Override
-    public ReportsListAdapter.ReportViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View item = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_report_dh, parent, false);
+    public ReportViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View item = LayoutInflater.from(context).inflate(R.layout.item_report_dh, parent, false);
 
         return new ReportViewHolder(item);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ReportsListAdapter.ReportViewHolder holder, int position) {
-        Reporte report = mReports.get(position);
-        holder.lblNombre.setText(mReports.get(position).getNombre());
-        //holder.nombreHueco.setText(mReports.get(position).getNombre());
+        //Reporte report = mReports.get(position);
+        holder.lblNombre.setText(nombres[position]);
+        holder.severidad.setText(severidad[position]);
        // holder.fecha.setText ((CharSequence) report.getFecha());
-        holder.severidad.setText(mReports.get(position).getSeveridad());
+
 
     //    listReportsFragment.cargarDatos();
 
-        notifyDataSetChanged();
+        //notifyDataSetChanged();
 
       }
 
@@ -71,12 +77,12 @@ public class ReportsListAdapter extends RecyclerView.Adapter<ReportsListAdapter.
     }
 
     @Override
-    public int getItemCount() { return mReports.size();  }
+    public int getItemCount() { return nombres.length;  }
 
-    public void setResults(List<Reporte> reports) {
+   /* public void setResults(List<Reporte> reports) {
         this.mReports = reports;
         notifyDataSetChanged();
-    }
+    }*/
 
 
     class ReportViewHolder extends RecyclerView.ViewHolder {

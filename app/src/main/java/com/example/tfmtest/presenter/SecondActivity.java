@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -73,6 +74,7 @@ public class SecondActivity extends AppCompatActivity{
         name = findViewById(R.id.name);
         email = findViewById(R.id.email);
         signOutBtn = findViewById(R.id.signout_btn);
+        recyclerView = findViewById(R.id.recyclerview);
 
 
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
@@ -87,7 +89,7 @@ public class SecondActivity extends AppCompatActivity{
         }
 
 
-       databaseReference = FirebaseDatabase.getInstance().getReference("Reportes");
+       /*databaseReference = FirebaseDatabase.getInstance().getReference("reportes");
           recyclerView = findViewById(R.id.recyclerview);
           reportes = new ArrayList<>();
             // nueva  version
@@ -95,10 +97,14 @@ public class SecondActivity extends AppCompatActivity{
         //base = new DataBase();
         recyclerView.setAdapter(itemAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        itemAdapter.setResults(reportes);
+        itemAdapter.setResults(reportes);*/
 
 
-          databaseReference.getDatabase();
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(new ReportsListAdapter(this));
+
+          //databaseReference.getDatabase();
          //   cargarDatos();
 
 
