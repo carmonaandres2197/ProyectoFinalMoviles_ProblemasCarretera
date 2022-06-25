@@ -1,14 +1,22 @@
 package com.example.tfmtest.database;
 
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 
 import com.example.tfmtest.interfaces.Callback;
 import com.example.tfmtest.interfaces.RealtimeDataListener;
 import com.example.tfmtest.model.Reporte;
+import com.example.tfmtest.presenter.SecondActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -19,6 +27,19 @@ import java.util.List;
 
 public class DataBase {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final FirebaseDatabase firebaseDataBase = FirebaseDatabase.getInstance();
+    private DatabaseReference databaseRefernce;
+
+
+   public  void createReporte(Reporte reporte){
+        databaseRefernce = firebaseDataBase.getReference().child("reporte");
+
+
+       databaseRefernce.push().setValue(reporte);
+
+        System.out.println("here");
+    }
+
 
     /**
     * Agrega un nuevo reporte a la BD
@@ -169,6 +190,13 @@ public class DataBase {
                     }
                 });
     }
+
+
+
+
+
+
+
 }
 
 
