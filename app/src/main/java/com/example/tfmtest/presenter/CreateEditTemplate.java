@@ -17,6 +17,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -27,6 +28,17 @@ import android.widget.VideoView;
 
 import com.example.tfmtest.JsonProvincias.GpsTracker;
 import com.example.tfmtest.R;
+import com.example.tfmtest.database.DataBase;
+import com.example.tfmtest.interfaces.Callback;
+import com.example.tfmtest.model.Reporte;
+import com.example.tfmtest.utils.Loading;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
 
 public class CreateEditTemplate  extends AppCompatActivity {
     Button btnTakePhoto;
@@ -48,8 +60,8 @@ public class CreateEditTemplate  extends AppCompatActivity {
         setContentView(R.layout.activity_create_edit_template);
 
         btnTakePhoto = findViewById(R.id.button);
-        imageView = findViewById(R.id.ver_image);
-        videoView = findViewById((R.id.play_video));
+        imageView = findViewById(R.id.verImagen);
+        videoView = findViewById((R.id.verVideo));
 
 
 
@@ -62,8 +74,6 @@ public class CreateEditTemplate  extends AppCompatActivity {
             }
         });
 //image view
-
-
 
         btnTakeVideo = findViewById(R.id.buttonVideo);
         btnTakeVideo.setOnClickListener(new View.OnClickListener() {
@@ -78,7 +88,7 @@ public class CreateEditTemplate  extends AppCompatActivity {
         });
 
         //location
-        tvLatitude = (TextView)findViewById(R.id.latitude);
+       tvLatitude = (TextView)findViewById(R.id.latitude);
         tvLongitude = (TextView)findViewById(R.id.longitude);
 
         try {
@@ -150,5 +160,35 @@ public class CreateEditTemplate  extends AppCompatActivity {
         imageView .setImageBitmap(resized) ;
     }
 
+    public  void playVideo (View view){
+        videoView.start();
+    }
+
+    public  void saveReport() {
+        DataBase db = new DataBase();
+        Reporte reporte = new Reporte();
+       reporte.setIdReporte("23444");
+        reporte.setEstado(true);
+        reporte.setNombre("Prueba 66666");
+       reporte.setFecha(new Date());
+       reporte.setLatitud("9.634256");
+       reporte.setLongitud("-83.996543");
+       reporte.setNombreUsuarioCrea("Christia");
+       reporte.setUbicacion("Alajuela, Costa Rica");
+
+
+
+       //Registrar
+        db.agregarRegistro(reporte,reporte.getIdReporte(), new Callback<Void>(){
+
+           @Override
+           public void onSucces(Void result) {
+               Log.i("Firestore", "Registro exitoso");
+            }
+           @Override            public void onFailed(Exception e) {
+               Log.i("Firestore", "Ocurrio un error " + e.getMessage());
+            }
+        });
+    }
 
 }
