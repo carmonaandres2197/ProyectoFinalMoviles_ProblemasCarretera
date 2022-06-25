@@ -1,53 +1,58 @@
 package com.example.tfmtest.presenter;
-
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-
+import androidx.core.content.ContextCompat;
 import android.Manifest;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.icu.text.Transliterator;
+import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Spinner;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
-
+import com.example.tfmtest.JsonProvincias.GpsTracker;
 import com.example.tfmtest.R;
-import com.example.tfmtest.model.ProvinciasCantonesDistritos;
-
-import java.util.HashMap;
-
-public class CreateEditTemplate  extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+import com.example.tfmtest.database.DataBase;
+import com.example.tfmtest.interfaces.Callback;
+import com.example.tfmtest.model.Reporte;
+import com.example.tfmtest.utils.Loading;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+public class CreateEditTemplate  extends AppCompatActivity {
     Button btnTakePhoto;
     Button btnTakeVideo;
-
     ImageView imageView;
     VideoView videoView;
+    Bitmap yourBitmap ;
     public static final int RequestPermissionCode = 1;
     static final int REQUEST_VIDEO_CAPTURE = 1;
-
-    ProvinciasCantonesDistritos pcdlist;
-    Spinner spProvincia,spCanton, spDistrito, spSeveridad;
-    ArrayAdapter<String> adProvincia,adCanton, adDistrito ,adSeveridad;
-    String[] sevelist= {"Alta", "Media", "Baja"};
+    //location
+    private GpsTracker gpsTracker;
+    private TextView tvLatitude,tvLongitude;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_edit_template);
-
         btnTakePhoto = findViewById(R.id.button);
-        imageView = findViewById(R.id.imageView);
-        videoView = findViewById((R.id.simpleVideoView));
+        imageView = findViewById(R.id.verImagen);
+        videoView = findViewById((R.id.verVideo));
         EnableRuntimePermission();
         btnTakePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +61,7 @@ public class CreateEditTemplate  extends AppCompatActivity implements AdapterVie
                 startActivityForResult(intent, 7);
             }
         });
+//image view
         btnTakeVideo = findViewById(R.id.buttonVideo);
         btnTakeVideo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,41 +70,31 @@ public class CreateEditTemplate  extends AppCompatActivity implements AdapterVie
                 if (takeVideoIntent.resolveActivity(getPackageManager()) != null) {
                     startActivityForResult(takeVideoIntent, REQUEST_VIDEO_CAPTURE);
                 }
-
             }
         });
-       //spinners
-        pcdlist = new ProvinciasCantonesDistritos();
-        spProvincia=(Spinner)findViewById(R.id.spinner_provincia);
-        spProvincia.setOnItemSelectedListener(this);
-        spCanton=(Spinner)findViewById(R.id.spinner_canton);
-        spCanton.setOnItemSelectedListener(this);
-        spDistrito=(Spinner)findViewById(R.id.spinner_distrito);
-        spDistrito.setOnItemSelectedListener(this);
-        spSeveridad=(Spinner)findViewById(R.id.spinner_severidad);
-        spSeveridad.setOnItemSelectedListener(this);
-
-        //adProvincia,adCanton, adDistrito;
-        adSeveridad= new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, sevelist);
-        spSeveridad.setAdapter(adSeveridad);
-        adProvincia= new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, pcdlist.provincias());
-        spProvincia.setAdapter(adProvincia);
-
+        //location
+        tvLatitude = (TextView)findViewById(R.id.latitude);
+        tvLongitude = (TextView)findViewById(R.id.longitude);
+        try {
+            if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
+                ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 101);
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
-
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 7 && resultCode == RESULT_OK) {
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
             imageView.setImageBitmap(bitmap);
+            yourBitmap=bitmap;
         }
         if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == RESULT_OK) {
             Uri videoUri = data.getData();
             videoView.setVideoURI(videoUri);
         }
-
     }
     public void EnableRuntimePermission(){
         if (ActivityCompat.shouldShowRequestPermissionRationale(CreateEditTemplate.this,
@@ -122,44 +118,44 @@ public class CreateEditTemplate  extends AppCompatActivity implements AdapterVie
                 break;
         }
     }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-
-        switch (parent.getId()) {
-            case R.id.spinner_provincia:
-            {
-                String[] list = pcdlist.scantones().get(position + 1);
-                adCanton = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
-                spCanton.setAdapter(adCanton);
-                adCanton.notifyDataSetChanged();
-            }
-                break;
-            case R.id.spinner_canton:
-            {
-                int iPospv = spProvincia.getSelectedItemPosition();
-                int iPosCan = spCanton.getSelectedItemPosition();
-                HashMap<Integer, String[]> distritos = pcdlist.scantonesDist().get(iPospv +1);
-                String[] list =distritos.get(iPosCan + 1);
-                adDistrito = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
-                spDistrito.setAdapter(adDistrito);
-                adDistrito.notifyDataSetChanged();
-            }
-                break;
-            case R.id.spinner_distrito:
-//                    Toast.makeText(this,"pos:"+p,Toast.LENGTH_LONG).show();
-
-            case R.id.spinner_severidad:
-//                    Toast.makeText(this,"pos:"+p,Toast.LENGTH_LONG).show();
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + parent.getId());
+    public void getLocation(View view){
+        gpsTracker = new GpsTracker(CreateEditTemplate.this);
+        if(gpsTracker.canGetLocation()){
+            double latitude = gpsTracker.getLatitude();
+            double longitude = gpsTracker.getLongitude();
+            tvLatitude.setText(String.valueOf(latitude));
+            tvLongitude.setText(String.valueOf(longitude));
+        }else{
+            gpsTracker.showSettingsAlert();
         }
     }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
+    public void resizeImage (View view) {
+        Bitmap resized = Bitmap. createScaledBitmap ( yourBitmap , 400 , 400 , true ) ;
+        imageView .setImageBitmap(resized) ;
+    }
+    public  void playVideo (View view){
+        videoView.start();
+    }
+    public  void saveReport() {
+        DataBase db = new DataBase();
+        Reporte reporte = new Reporte();
+        reporte.setIdReporte("23444");
+        reporte.setEstado(true);
+        reporte.setNombre("Prueba 66666");
+        reporte.setFecha(new Date());
+        reporte.setLatitud("9.634256");
+        reporte.setLongitud("-83.996543");
+        reporte.setNombreUsuarioCrea("Christia");
+        reporte.setUbicacion("Alajuela, Costa Rica");
+        //Registrar
+        db.agregarRegistro(reporte,reporte.getIdReporte(), new Callback<Void>(){
+            @Override
+            public void onSucces(Void result) {
+                Log.i("Firestore", "Registro exitoso");
+            }
+            @Override            public void onFailed(Exception e) {
+                Log.i("Firestore", "Ocurrio un error " + e.getMessage());
+            }
+        });
     }
 }
