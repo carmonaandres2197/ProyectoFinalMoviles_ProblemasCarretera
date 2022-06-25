@@ -17,9 +17,12 @@ import android.provider.MediaStore;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -27,6 +30,7 @@ import com.example.tfmtest.JsonProvincias.GpsTracker;
 import com.example.tfmtest.R;
 import com.example.tfmtest.database.DataBase;
 import com.example.tfmtest.interfaces.Callback;
+import com.example.tfmtest.model.ProvinciasCantonesDistritos;
 import com.example.tfmtest.model.Reporte;
 import com.example.tfmtest.utils.Loading;
 import java.text.SimpleDateFormat;
@@ -34,8 +38,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
-public class CreateEditTemplate  extends AppCompatActivity {
+public class CreateEditTemplate  extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
     Button btnTakePhoto;
     Button btnTakeVideo;
     ImageView imageView;
@@ -46,6 +51,11 @@ public class CreateEditTemplate  extends AppCompatActivity {
     //location
     private GpsTracker gpsTracker;
     private TextView tvLatitude,tvLongitude;
+    ProvinciasCantonesDistritos pcdlist;
+    Spinner spProvincia,spCanton, spDistrito, spSeveridad;
+    ArrayAdapter<String> adProvincia,adCanton, adDistrito ,adSeveridad;
+    String[] sevelist= {"Alta", "Media", "Baja"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +82,23 @@ public class CreateEditTemplate  extends AppCompatActivity {
                 }
             }
         });
+        //spinners
+        pcdlist = new ProvinciasCantonesDistritos();
+        spProvincia=(Spinner)findViewById(R.id.spinner_provincia);
+        spProvincia.setOnItemSelectedListener(this);
+        spCanton=(Spinner)findViewById(R.id.spinner_canton);
+        spCanton.setOnItemSelectedListener(this);
+        spDistrito=(Spinner)findViewById(R.id.spinner_distrito);
+        spDistrito.setOnItemSelectedListener(this);
+        spSeveridad=(Spinner)findViewById(R.id.spinner_severidad2);
+        spSeveridad.setOnItemSelectedListener(this);
+
+        //adProvincia,adCanton, adDistrito;
+        adSeveridad= new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, sevelist);
+        spSeveridad.setAdapter(adSeveridad);
+        adProvincia= new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, pcdlist.provincias());
+        spProvincia.setAdapter(adProvincia);
+
         //location
         tvLatitude = (TextView)findViewById(R.id.latitude);
         tvLongitude = (TextView)findViewById(R.id.longitude);
@@ -157,5 +184,43 @@ public class CreateEditTemplate  extends AppCompatActivity {
                 Log.i("Firestore", "Ocurrio un error " + e.getMessage());
             }
         });
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        switch (parent.getId()) {
+            case R.id.spinner_provincia:
+            {
+                String[] list = pcdlist.scantones().get(position + 1);
+                adCanton = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
+                spCanton.setAdapter(adCanton);
+                adCanton.notifyDataSetChanged();
+            }
+            break;
+            case R.id.spinner_canton:
+            {
+                int iPospv = spProvincia.getSelectedItemPosition();
+                int iPosCan = spCanton.getSelectedItemPosition();
+                HashMap<Integer, String[]> distritos = pcdlist.scantonesDist().get(iPospv +1);
+                String[] list =distritos.get(iPosCan + 1);
+                adDistrito = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
+                spDistrito.setAdapter(adDistrito);
+                adDistrito.notifyDataSetChanged();
+            }
+            break;
+            case R.id.spinner_distrito:
+//                    Toast.makeText(this,"pos:"+p,Toast.LENGTH_LONG).show();
+
+            case R.id.spinner_severidad2:
+//                    Toast.makeText(this,"pos:"+p,Toast.LENGTH_LONG).show();
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + parent.getId());
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }
