@@ -20,11 +20,11 @@ public class Reporte implements Comparable<Reporte>, Serializable {
     String pendienteAtender;
 
 
-
-    public Reporte(String nombre, String severidad) {
-        super();
+    public Reporte(String nombre, Date fecha, String severidad, Boolean estado) {
         this.nombre = nombre;
+        this.fecha = fecha;
         this.severidad = severidad;
+        this.estado = estado;
     }
 
     public Reporte() {

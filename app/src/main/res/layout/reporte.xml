@@ -12,15 +12,18 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"
-        android:layout_width="406dp"
-        android:layout_height="636dp"
+        android:layout_width="408dp"
+        android:layout_height="563dp"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.982"
+        app:layout_constraintVertical_bias="0.434"
         tools:listitem="@layout/item_report_dh" />
+    <!--        app:layout_constraintVertical_bias="1"-->
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -5,30 +5,31 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.example.tfmtest.R;
 import com.example.tfmtest.model.Reporte;
+import com.example.tfmtest.presenter.SecondActivity;
+import com.example.tfmtest.presenter.TabActivity;
 
 import java.util.Date;
 import java.util.List;
 
 public class ReportsListAdapter extends RecyclerView.Adapter<ReportsListAdapter.ReportViewHolder> {
     Context  context;
-    //private List<Reporte> mReports; // Cached copy of words
+    private List<Reporte> mReports; // Cached copy of words
 
-    String[] nombres = {"Cobano, Pun, 100 mts sur cancha", "Mts Oca, SJ, Frente a Iglesia", "Cahuita, Lim, 50 mts este del parque"};
-    Date[] fechas = {new Date(), new Date(), new Date()};
-    String[] severidad = {"Baja", "Media", "Alta"};
-    Boolean[] estado = {true, false, true};
-
-  //  private ListReportsFragment listReportsFragment;
-
+    String[] nombres = {"Cobano, Pun, 100 mts sur cancha", "Mts Oca, SJ, Frente a Iglesia", "Cahuita, Lim, 50 mts este del parque", "Caldera, SJ, ruta nacional 707","Puerto Viejo, Lim, 150 mts este de la principal","Turrialba, Cartago, 100 mts sur de la Ruta 10"};
+    Date[] fechas = {new Date(), new Date(), new Date(), new Date(), new Date(), new Date()};
+    String[] severidad = {"Baja", "Media", "Alta", "Alta", "Alta", "Baja"};
+    Boolean[] estado = {true, false, true, false, true, false};
 
     public ReportsListAdapter(Context context) {
         //this.mReports = reportes;
@@ -36,13 +37,7 @@ public class ReportsListAdapter extends RecyclerView.Adapter<ReportsListAdapter.
         notifyDataSetChanged();
 
     }
-//    public void setListReportsFragment(ListReportsFragment listReportsFragment) {
-//        this.listReportsFragment = listReportsFragment;
-//    }
 
-    /*public List<Reporte> getReportes() {
-        return mReports;
-    }*/
 
     @NonNull
     @Override
@@ -55,14 +50,38 @@ public class ReportsListAdapter extends RecyclerView.Adapter<ReportsListAdapter.
     @Override
     public void onBindViewHolder(@NonNull ReportsListAdapter.ReportViewHolder holder, int position) {
         //Reporte report = mReports.get(position);
-        holder.lblNombre.setText(nombres[position]);
+        holder.nombreHueco.setText(nombres[position]);
         holder.severidad.setText(severidad[position]);
-       // holder.fecha.setText ((CharSequence) report.getFecha());
+
+        holder.fecha.setText(fechas.toString());
+        holder.estado.setText(estado.toString());
+
+        holder.linearLayout.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                v.setOnLongClickListener(this);
+                Toast.makeText(v.getContext(),"Click on D-H",Toast.LENGTH_LONG).show();
+              //  nombres.remove(current);
+                holder.linearLayout.removeViewInLayout(v);
+
+                notifyDataSetChanged();
+                Toast.makeText(
+                        v.getContext(),
+                        "D-H Delete Successful",
+                        Toast.LENGTH_LONG).show();
+                return false;
+            }
+        });
+
+        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
 
-    //    listReportsFragment.cargarDatos();
 
-        //notifyDataSetChanged();
 
       }
 
@@ -79,28 +98,23 @@ public class ReportsListAdapter extends RecyclerView.Adapter<ReportsListAdapter.
     @Override
     public int getItemCount() { return nombres.length;  }
 
-   /* public void setResults(List<Reporte> reports) {
-        this.mReports = reports;
-        notifyDataSetChanged();
-    }*/
-
 
     class ReportViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView lblNombre;
-       // public TextView nombreHueco;
-       // public TextView fecha;
+        public LinearLayout linearLayout;
+        public TextView nombreHueco;
+        public TextView fecha;
         public TextView severidad;
-        //   public TextView estado;
+        public TextView estado;
 
 
         private ReportViewHolder(View itemView) {
             super(itemView);
-            lblNombre = itemView.findViewById(R.id.nombree);
-            //nombreHueco = itemView.findViewById(R.id.nombrehueco);
-         //   fecha = itemView.findViewById(R.id.fecha);
+            linearLayout = itemView.findViewById(R.id.layoutGeneral);
+            nombreHueco = itemView.findViewById(R.id.nombree);
+            fecha = itemView.findViewById(R.id.fecha);
             severidad = itemView.findViewById(R.id.severidad);
-             //estado = itemView.findViewById(R.id.estadohueco);
+            estado = itemView.findViewById(R.id.estado);
 
         }
     }
