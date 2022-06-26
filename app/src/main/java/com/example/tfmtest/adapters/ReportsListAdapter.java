@@ -11,11 +11,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tfmtest.R;
+import com.example.tfmtest.model.Address;
 import com.example.tfmtest.model.Reporte;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.gson.Gson;
+
+import java.lang.reflect.Type;
 
 public class ReportsListAdapter extends FirestoreRecyclerAdapter<Reporte,ReportsListAdapter.ReportViewHolder>{
+
+    private FirebaseFirestore db;
 
     public ReportsListAdapter(@NonNull FirestoreRecyclerOptions<Reporte> options) {
         super(options);
@@ -24,7 +31,10 @@ public class ReportsListAdapter extends FirestoreRecyclerAdapter<Reporte,Reports
     @Override
     protected void onBindViewHolder(@NonNull ReportViewHolder holder, int position, @NonNull Reporte report) {
 
-        holder.nombrehueco.setText(report.getUbicacion());
+        Gson gson = new Gson();
+        Address address = gson.fromJson(report.getUbicacion(), (Type) Address.class);
+        String direccion = address.getProvincia() + " , " + address.getCanton() + " , " + address.getDistrito();
+        holder.nombrehueco.setText(direccion);
         holder.severidad.setText(report.getSeveridad());
         holder.fecha.setText(report.getFecha().toString());
 
@@ -43,7 +53,6 @@ public class ReportsListAdapter extends FirestoreRecyclerAdapter<Reporte,Reports
                 Toast.makeText(v.getContext(),"Click on D-H",Toast.LENGTH_LONG).show();
 
 
-
                 notifyDataSetChanged();
                 Toast.makeText(
                         v.getContext(),
@@ -59,8 +68,6 @@ public class ReportsListAdapter extends FirestoreRecyclerAdapter<Reporte,Reports
 
             }
         });
-
-
     }
 
 

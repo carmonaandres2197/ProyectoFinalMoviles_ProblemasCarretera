@@ -71,10 +71,10 @@
         android:layout_gravity="bottom|end"
         android:layout_marginStart="340dp"
         android:layout_marginTop="665dp"
-
-        android:clickable="true"
+        android:backgroundTint="@color/purple_200"
         android:layout_marginEnd="400dp"
         android:layout_marginBottom="12dp"
+        android:clickable="true"
         android:src="@drawable/ic_add_black_24dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -85,6 +85,7 @@
         android:layout_marginTop="664dp"
         android:layout_marginEnd="300dp"
         android:layout_marginBottom="12dp"
+        android:backgroundTint="@color/purple_200"
         android:clickable="true"
         app:srcCompat="@android:drawable/ic_menu_search" />
 

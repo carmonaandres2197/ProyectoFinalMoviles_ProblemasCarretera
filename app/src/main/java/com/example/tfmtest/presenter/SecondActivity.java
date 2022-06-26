@@ -93,10 +93,10 @@ public class SecondActivity extends AppCompatActivity{
         firebaseFirestore = FirebaseFirestore.getInstance();
         recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        Query query = firebaseFirestore.collection("Reportes");
-
+        Query query = firebaseFirestore.collection("Reportes").orderBy("fecha").orderBy("severidad").orderBy("estado");
 
         FirestoreRecyclerOptions<Reporte> firestoreRecyclerOptions = new FirestoreRecyclerOptions.Builder<Reporte>().setQuery(query, Reporte.class).build();
+
         itemAdapter = new ReportsListAdapter(firestoreRecyclerOptions);
         itemAdapter.notifyDataSetChanged();
         recyclerView.setAdapter(itemAdapter);
@@ -105,15 +105,18 @@ public class SecondActivity extends AppCompatActivity{
 
 
     @Override
+
     protected void onStart() {
         super.onStart();
         itemAdapter.startListening();
+
     }
 
     @Override
     protected void onStop() {
         super.onStop();
         itemAdapter.stopListening();
+
 
     }
 
