@@ -32,7 +32,7 @@ public class DataBase {
 
 
    public  void createReporte(Reporte reporte){
-        databaseRefernce = firebaseDataBase.getReference().child("reporte");
+        databaseRefernce = firebaseDataBase.getReference().child("Prueba");
 
 
        databaseRefernce.push().setValue(reporte);

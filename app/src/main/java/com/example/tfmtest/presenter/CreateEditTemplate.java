@@ -1,27 +1,22 @@
 package com.example.tfmtest.presenter;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import android.Manifest;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.location.Location;
-import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.provider.Settings;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,14 +28,19 @@ import com.example.tfmtest.interfaces.Callback;
 import com.example.tfmtest.model.ProvinciasCantonesDistritos;
 import com.example.tfmtest.model.Reporte;
 
+import java.io.ByteArrayOutputStream;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.UUID;
+
 public class CreateEditTemplate  extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
     Button btnTakePhoto;
     Button btnTakeVideo;
     ImageView imageView;
+    ImageButton save;
     VideoView videoView;
-    Bitmap yourBitmap ;
+    Bitmap bitmapImage;
+    Bitmap bitmapVideo;
     public static final int RequestPermissionCode = 1;
     static final int REQUEST_VIDEO_CAPTURE = 1;
     //location
@@ -52,6 +52,8 @@ public class CreateEditTemplate  extends AppCompatActivity implements AdapterVie
     String[] sevelist= {"Alta", "Media", "Baja"};
     String[] tipolist= {"Derrumbe", "Hueco"};
 
+    Reporte reporte = new Reporte();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +61,7 @@ public class CreateEditTemplate  extends AppCompatActivity implements AdapterVie
         btnTakePhoto = findViewById(R.id.button);
         imageView = findViewById(R.id.verImagen);
         videoView = findViewById((R.id.verVideo));
+        save = findViewById((R.id.save_report));
         EnableRuntimePermission();
         btnTakePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,6 +114,62 @@ public class CreateEditTemplate  extends AppCompatActivity implements AdapterVie
         } catch (Exception e){
             e.printStackTrace();
         }
+
+        // save reporte
+
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // creating a variable for our
+
+                DataBase db = new DataBase();
+                reporte.setIdReporte(UUID.randomUUID().toString());
+                reporte.setEstado(false);
+                String Provincia = spProvincia.getSelectedItem().toString();
+                String Canton = spCanton.getSelectedItem().toString();
+                String distrito = spDistrito.getSelectedItem().toString();
+                String tipoReporte = sptipoReporte.getSelectedItem().toString();
+                String longitud= tvLongitude.toString();
+                String latitud= tvLatitude.toString();
+                reporte.setNombre(String.join(tipoReporte,"-", Character.toString(Provincia.charAt(0)),"-",
+                        Character.toString(Canton.charAt(0)), "-", Character.toString(distrito.charAt(0)),"-", Character.toString(longitud.charAt(0)),
+                        Character.toString(latitud.charAt(0))));
+                reporte.setFecha(new Date());
+                reporte.setLatitud(longitud);
+                reporte.setLongitud(latitud);
+                reporte.setNombreUsuarioCrea("Christian");
+                reporte.setUbicacion(Provincia +", "+ Canton + ", "+ distrito);
+                reporte.setImagen(encodeBase64(bitmapImage));
+
+                try {
+                    db.createReporte(reporte);
+                    db.agregarRegistro(reporte,reporte.getIdReporte(), new Callback<Void>(){
+                        @Override
+                        public void onSucces(Void result) {
+                            Log.i("Firestore", "Registro exitoso");
+                        }
+                        @Override            public void onFailed(Exception e) {
+                            Log.i("Firestore", "Ocurrio un error " + e.getMessage());
+                        }
+                    });
+
+                    Toast.makeText(CreateEditTemplate.this, "Reporte Guardado", Toast.LENGTH_SHORT).show();
+
+                }catch (Exception e){
+                    Toast.makeText(CreateEditTemplate.this, "algo salio mal", Toast.LENGTH_SHORT).show();
+
+                }
+
+            }
+        });
+    }
+
+    public String encodeBase64(Bitmap bitmap){
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+        byte[] byteFormat = stream.toByteArray();
+      return Base64.encodeToString(byteFormat, Base64.NO_WRAP);
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -118,7 +177,7 @@ public class CreateEditTemplate  extends AppCompatActivity implements AdapterVie
         if (requestCode == 7 && resultCode == RESULT_OK) {
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
             imageView.setImageBitmap(bitmap);
-            yourBitmap=bitmap;
+            bitmapImage =bitmap;
         }
         if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == RESULT_OK) {
             Uri videoUri = data.getData();
@@ -162,31 +221,7 @@ public class CreateEditTemplate  extends AppCompatActivity implements AdapterVie
     public  void playVideo (View view){
         videoView.start();
     }
-    public  void saveReport() {
 
-        // creating a variable for our
-
-        DataBase db = new DataBase();
-        Reporte reporte = new Reporte();
-        reporte.setIdReporte("23444");
-        reporte.setEstado(true);
-        reporte.setNombre("Prueba 66666");
-        reporte.setFecha(new Date());
-        reporte.setLatitud("9.634256");
-        reporte.setLongitud("-83.996543");
-        reporte.setNombreUsuarioCrea("Christia");
-        reporte.setUbicacion("Alajuela, Costa Rica");
-        //Registrar
-        db.agregarRegistro(reporte,reporte.getIdReporte(), new Callback<Void>(){
-            @Override
-            public void onSucces(Void result) {
-                Log.i("Firestore", "Registro exitoso");
-            }
-            @Override            public void onFailed(Exception e) {
-                Log.i("Firestore", "Ocurrio un error " + e.getMessage());
-            }
-        });
-    }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
