@@ -3,13 +3,13 @@ package com.example.tfmtest.model;
 public class Address {
       String canton;
       String distrito;
-      String direccion;
+      String provincia;
 
 
      public Address(String canton, String distrito, String direccion){
          this.canton= canton;
          this.distrito = distrito;
-         this.direccion = direccion;
+         this.provincia = direccion;
      }
 
      public  String getDistrito(){
@@ -20,12 +20,12 @@ public class Address {
          return this.canton;
      }
 
-     public String getDireccion(){
-         return this.direccion;
+     public String getProvincia(){
+         return this.provincia;
      }
 
-     public void setDireccion(String direccion){
-         this.direccion= direccion;
+     public void setProvincia(String provincia){
+         this.provincia = provincia;
      }
 
      public void setCanton(String canton){
@@ -33,7 +33,7 @@ public class Address {
     }
 
     public void setDistrito(String distrito){
-        this.direccion= distrito;
+        this.provincia = distrito;
     }
 
     

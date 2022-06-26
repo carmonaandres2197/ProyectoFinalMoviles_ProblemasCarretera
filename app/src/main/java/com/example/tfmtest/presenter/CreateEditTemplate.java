@@ -1,7 +1,5 @@
 package com.example.tfmtest.presenter;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
+
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -21,16 +19,25 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 import com.example.tfmtest.JsonProvincias.GpsTracker;
 import com.example.tfmtest.R;
 import com.example.tfmtest.database.DataBase;
 import com.example.tfmtest.interfaces.Callback;
+import com.example.tfmtest.model.Address;
 import com.example.tfmtest.model.ProvinciasCantonesDistritos;
 import com.example.tfmtest.model.Reporte;
+import com.google.gson.Gson;
 
 import java.io.ByteArrayOutputStream;
+import java.lang.reflect.Type;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 public class CreateEditTemplate  extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
@@ -130,16 +137,25 @@ public class CreateEditTemplate  extends AppCompatActivity implements AdapterVie
                 String Canton = spCanton.getSelectedItem().toString();
                 String distrito = spDistrito.getSelectedItem().toString();
                 String tipoReporte = sptipoReporte.getSelectedItem().toString();
+                //Guardando direccion   como Json
+                Address addres = new Address(Canton,distrito, Provincia);
+                Gson gson = new Gson();
+                String jsonDireccion = gson.toJson(addres).toString();
+                reporte.setUbicacion(jsonDireccion);
+
+                String json = jsonDireccion;
+                Address address = gson.fromJson(json, (Type) Address.class);
+                 System.out.print(address);
+
                 String longitud= tvLongitude.toString();
                 String latitud= tvLatitude.toString();
+                reporte.setLatitud(longitud);
+                reporte.setLongitud(latitud);
+                reporte.setNombreUsuarioCrea("Christian");
                 reporte.setNombre(String.join(tipoReporte,"-", Character.toString(Provincia.charAt(0)),"-",
                         Character.toString(Canton.charAt(0)), "-", Character.toString(distrito.charAt(0)),"-", Character.toString(longitud.charAt(0)),
                         Character.toString(latitud.charAt(0))));
                 reporte.setFecha(new Date());
-                reporte.setLatitud(longitud);
-                reporte.setLongitud(latitud);
-                reporte.setNombreUsuarioCrea("Christian");
-                reporte.setUbicacion(Provincia +", "+ Canton + ", "+ distrito);
                 reporte.setImagen(encodeBase64(bitmapImage));
 
                 try {
@@ -211,7 +227,8 @@ public class CreateEditTemplate  extends AppCompatActivity implements AdapterVie
         if(gpsTracker.canGetLocation()){
             double latitude = gpsTracker.getLatitude();
             double longitude = gpsTracker.getLongitude();
-            tvLatitude.setText(String.valueOf(latitude));
+            reporte.setLatitud(String.valueOf(latitude));
+            tvLatitude.setText(String.valueOf(longitude));
             tvLongitude.setText(String.valueOf(longitude));
         }else{
             gpsTracker.showSettingsAlert();
