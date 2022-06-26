@@ -1,21 +1,20 @@
 package com.example.tfmtest.presenter;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.tfmtest.adapters.ReportsListAdapter;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tfmtest.R;
+import com.example.tfmtest.adapters.ReportsListAdapter;
 import com.example.tfmtest.model.Reporte;
+import com.example.tfmtest.utils.Loading;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -23,14 +22,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
-import com.example.tfmtest.model.Reporte;
-import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
-import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.List;
 
@@ -45,7 +38,6 @@ public class SecondActivity extends AppCompatActivity{
     List<Reporte> reportes;
     RecyclerView recyclerView;
     ReportsListAdapter itemAdapter;
-   // DatabaseReference databaseReference;
     FirebaseFirestore firebaseFirestore;
 
 
@@ -105,10 +97,10 @@ public class SecondActivity extends AppCompatActivity{
 
 
         FirestoreRecyclerOptions<Reporte> firestoreRecyclerOptions = new FirestoreRecyclerOptions.Builder<Reporte>().setQuery(query, Reporte.class).build();
-
         itemAdapter = new ReportsListAdapter(firestoreRecyclerOptions);
         itemAdapter.notifyDataSetChanged();
         recyclerView.setAdapter(itemAdapter);
+
     }
 
 

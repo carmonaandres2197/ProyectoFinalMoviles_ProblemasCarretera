@@ -21,24 +21,28 @@ public class ReportsListAdapter extends FirestoreRecyclerAdapter<Reporte,Reports
         super(options);
     }
 
-
-
-
     @Override
     protected void onBindViewHolder(@NonNull ReportViewHolder holder, int position, @NonNull Reporte report) {
 
-        holder.nombreHueco.setText(report.getNombre());
+        holder.nombrehueco.setText(report.getUbicacion());
         holder.severidad.setText(report.getSeveridad());
         holder.fecha.setText(report.getFecha().toString());
-        holder.estado.setText(report.getEstado().toString());
+
+
+        if(report.getEstado() == true){
+            holder.estado.setText("Reportado");
+        }else
+        {
+            holder.estado.setText("No Reportado");
+        }
 
         holder.linearLayout.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 v.setOnLongClickListener(this);
                 Toast.makeText(v.getContext(),"Click on D-H",Toast.LENGTH_LONG).show();
-              //  nombres.remove(current);
-                holder.linearLayout.removeViewInLayout(v);
+
+
 
                 notifyDataSetChanged();
                 Toast.makeText(
@@ -70,13 +74,13 @@ public class ReportsListAdapter extends FirestoreRecyclerAdapter<Reporte,Reports
 
     public class ReportViewHolder extends RecyclerView.ViewHolder {
         public LinearLayout linearLayout;
-        public TextView nombreHueco, fecha, severidad, estado;
+        public TextView nombrehueco, fecha, severidad, estado;
 
 
         public ReportViewHolder(@NonNull View itemView) {
             super(itemView);
             linearLayout = itemView.findViewById(R.id.layoutGeneral);
-            nombreHueco = itemView.findViewById(R.id.nombree);
+            nombrehueco = itemView.findViewById(R.id.nombree);
             fecha = itemView.findViewById(R.id.fecha);
             severidad = itemView.findViewById(R.id.severidad);
             estado = itemView.findViewById(R.id.estado);
@@ -85,7 +89,6 @@ public class ReportsListAdapter extends FirestoreRecyclerAdapter<Reporte,Reports
 
         }
     }
-
 
 // RecyclerView.Adapter<ReportsListAdapter.ReportViewHolder>
 //    Context  context;
