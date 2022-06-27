@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondo"
-    >
+    tools:context="com.example.tfmtest.presenter.SecondActivity"
+    android:background="@drawable/fondo">
 
     <TextView
         android:id="@+id/title"
@@ -16,8 +16,9 @@
         android:layout_marginEnd="10dp"
         android:gravity="center_horizontal"
         android:padding="10dp"
-        android:text="Listado de Derrumbes-huecos"
-        android:textSize="18sp"
+        android:text="Listado de Derrumbes-Huecos"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
     <TextView
@@ -26,25 +27,30 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginLeft="2dp"
         android:gravity="right"
+        android:src="@drawable/useroutline"
         android:text="Nombre: "
         android:textAlignment="gravity"
         android:textColor="@color/white"
-        android:textSize="16sp"
-        android:src="@drawable/ic_person"/>
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/email"
-        android:text="Email: "
-        android:textColor="@color/white"
-        android:layout_alignParentLeft="true"
-        android:gravity="right"
-        android:textAlignment="gravity"
-        android:layout_centerHorizontal="true"
         android:layout_below="@id/name"
-        android:textSize="16sp"/>
+        android:layout_alignParentLeft="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="2dp"
+        android:gravity="right"
+        android:text="Email: "
+        android:textAlignment="gravity"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/signout_btn"
@@ -52,25 +58,36 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerHorizontal="true"
-        android:text="Sign out" />
+        android:text="Sign out"
+        android:textColor="#000000" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler1"
-        android:layout_width="match_parent"
-        android:layout_height="657dp"
-        android:layout_below="@id/email"
-        android:layout_marginTop="30dp"
-        android:paddingTop="20dp" />
+
+    <include layout="@layout/reporte" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_marginStart="200dp"
-        android:layout_marginTop="650dp"
+        android:layout_marginStart="340dp"
+        android:layout_marginTop="665dp"
+        android:backgroundTint="@color/purple_200"
         android:layout_marginEnd="400dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="12dp"
+        android:clickable="true"
         android:src="@drawable/ic_add_black_24dp" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="280dp"
+        android:layout_marginTop="664dp"
+        android:layout_marginEnd="300dp"
+        android:layout_marginBottom="12dp"
+        android:backgroundTint="@color/purple_200"
+        android:clickable="true"
+        app:srcCompat="@android:drawable/ic_menu_search" />
+
 
 </RelativeLayout>

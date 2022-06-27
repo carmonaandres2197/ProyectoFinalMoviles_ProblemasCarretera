@@ -1,8 +1,10 @@
 package com.example.tfmtest.model;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.Map;
 
-public class Reporte implements Comparable<Reporte> {
+public class Reporte implements Comparable<Reporte>, Serializable {
     String idReporte;
     String nombre;
     Date fecha;
@@ -16,6 +18,35 @@ public class Reporte implements Comparable<Reporte> {
     String imagen;
     String video;
     String pendienteAtender;
+
+
+    public Reporte(String nombre, Date fecha, String severidad, Boolean estado) {
+        this.nombre = nombre;
+        this.fecha = fecha;
+        this.severidad = severidad;
+        this.estado = estado;
+    }
+
+    public Reporte() {
+        super();
+    }
+
+    public Reporte(String idReporte, String nombre, Date fecha, String severidad, Boolean estado, String ubicacion, String nombreUsuarioCrea, String idUsuario, String latitud, String longitud, String imagen, String video, String pendienteAtender) {
+        this.idReporte = idReporte;
+        this.nombre = nombre;
+        this.fecha = fecha;
+        this.severidad = severidad;
+        this.estado = estado;
+        this.ubicacion = ubicacion;
+        this.nombreUsuarioCrea = nombreUsuarioCrea;
+        this.idUsuario = idUsuario;
+        this.latitud = latitud;
+        this.longitud = longitud;
+        this.imagen = imagen;
+        this.video = video;
+        this.pendienteAtender = pendienteAtender;
+    }
+
 
     public String getIdReporte() {
         return idReporte;
@@ -130,3 +161,5 @@ public class Reporte implements Comparable<Reporte> {
         return 1;
     }
 }
+
+
