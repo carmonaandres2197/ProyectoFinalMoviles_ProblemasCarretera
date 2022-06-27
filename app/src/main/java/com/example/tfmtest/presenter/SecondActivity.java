@@ -75,12 +75,19 @@ public class SecondActivity extends AppCompatActivity{
             }
         });
 
-        FloatingActionButton fab = findViewById(R.id.button_goBack);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) { /// aca se agrega la activity a  donde se agregar los dmbes de la parte de christian
-                Intent intent = new Intent(SecondActivity.this, TabActivity.class);
+                Intent intent = new Intent(SecondActivity.this, CreateEditTemplate.class);
                 startActivityForResult(intent, NEW_DERRUMBE_ACTIVITY_REQUEST_CODE);
+
+//
+//                public void navigateEditCreateEvent(View view) {
+//                    Intent intent = new Intent(MainActivity.this, .class);
+//                    startActivity(intent);
+//                }
+
             }
         });
 
