@@ -134,7 +134,6 @@ public class ReportsListAdapter extends FirestoreRecyclerAdapter<Reporte,Reports
     public class ReportViewHolder extends RecyclerView.ViewHolder {
         public LinearLayout linearLayout;
         public TextView nombrehueco, fecha, severidad, estado;
-        public ImageView btn_delete;
 
 
         public ReportViewHolder(@NonNull View itemView) {
@@ -144,7 +143,7 @@ public class ReportsListAdapter extends FirestoreRecyclerAdapter<Reporte,Reports
             fecha = itemView.findViewById(R.id.fecha);
             severidad = itemView.findViewById(R.id.severidad);
             estado = itemView.findViewById(R.id.estado);
-            btn_delete = itemView.findViewById(R.id.btnEliminar);
+
 
 
 

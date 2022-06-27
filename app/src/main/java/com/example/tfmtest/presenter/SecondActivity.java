@@ -53,7 +53,6 @@ public class SecondActivity extends AppCompatActivity{
 
 
     public static final int NEW_DERRUMBE_ACTIVITY_REQUEST_CODE = 1;
-    public static final int DETAILS_DERRUMBE_ACTIVITY_REQUEST_CODE = 1;
     public static final int SEARCH_DERRUMBE_ACTIVITY_REQUEST_CODE = 1;
 
     @Override
