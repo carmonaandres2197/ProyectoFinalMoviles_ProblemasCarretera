@@ -74,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
     void navigateToSecondActivity(){
-
         Intent intent = new Intent(MainActivity.this,SecondActivity.class);
         startActivity(intent);
         finish();

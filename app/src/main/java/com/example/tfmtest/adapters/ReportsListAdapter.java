@@ -20,7 +20,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.tfmtest.R;
 import com.example.tfmtest.model.Address;
 import com.example.tfmtest.model.Reporte;
-import com.example.tfmtest.presenter.SecondActivity;
 import com.example.tfmtest.presenter.TabActivity;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
