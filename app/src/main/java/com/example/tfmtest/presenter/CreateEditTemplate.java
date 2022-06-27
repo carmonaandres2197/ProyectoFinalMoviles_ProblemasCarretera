@@ -159,7 +159,7 @@ public class CreateEditTemplate  extends AppCompatActivity implements AdapterVie
                 reporte.setNombre(tipoReporte + " - "+ Provincia + " - "+ Canton+ " - "+ distrito);
                 reporte.setFecha(new Date());
 
-                reporte.setSeveridad(spSeveridad.toString());
+                reporte.setSeveridad(spSeveridad.getSelectedItem().toString());
 
                 try {
                     db.createReporte(reporte);
