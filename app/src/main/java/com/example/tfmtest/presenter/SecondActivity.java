@@ -95,7 +95,7 @@ public class SecondActivity extends AppCompatActivity{
         fab_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) { /// aca se agrega la activity a  donde se agregar los dmbes de la parte de christian
-                Intent intent = new Intent(SecondActivity.this, TabActivity.class);
+                Intent intent = new Intent(SecondActivity.this, SearchReport.class);
                 startActivityForResult(intent, SEARCH_DERRUMBE_ACTIVITY_REQUEST_CODE);
             }
         });
