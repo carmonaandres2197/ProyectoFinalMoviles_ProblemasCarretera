@@ -6,20 +6,28 @@
     android:layout_height="match_parent"
     tools:context="com.example.tfmtest.presenter.SecondActivity"
     android:background="@drawable/fondo">
+    <LinearLayout android:layout_width="5dp" android:layout_height="5dp">
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="10dp"
-        android:gravity="center_horizontal"
-        android:padding="10dp"
-        android:text="Listado de Derrumbes-Huecos"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        <CheckBox
+            android:id="@+id/checkBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="CheckBox" />
+
+        <CalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+<!--        <SearchView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent" >-->
+
+<!--        </SearchView>-->
+    </LinearLayout>
+
 
     <TextView
         android:id="@+id/name"
@@ -59,7 +67,8 @@
         android:layout_alignParentRight="true"
         android:layout_centerHorizontal="true"
         android:text="Sign out"
-        android:textColor="#000000" />
+        android:textColor="#000000"
+        app:iconTint="#9254FF" />
 
 
     <include layout="@layout/reporte" />
@@ -69,25 +78,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_marginStart="340dp"
+        android:layout_marginStart="350dp"
         android:layout_marginTop="665dp"
-        android:backgroundTint="@color/purple_200"
-        android:layout_marginEnd="400dp"
-        android:layout_marginBottom="12dp"
-        android:clickable="true"
-        android:src="@drawable/ic_add_black_24dp" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_search"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="280dp"
-        android:layout_marginTop="664dp"
-        android:layout_marginEnd="300dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginEnd="200dp"
+        android:layout_marginBottom="15dp"
         android:backgroundTint="@color/purple_200"
         android:clickable="true"
-        app:srcCompat="@android:drawable/ic_menu_search" />
+        android:src="@drawable/ic_baseline_arrow_back_24"
+        app:backgroundTint="#020101" />
 
 
 </RelativeLayout>
