@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,7 +27,11 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 
 public class SecondActivity extends AppCompatActivity{
@@ -38,6 +44,11 @@ public class SecondActivity extends AppCompatActivity{
     List<Reporte> reportes;
     RecyclerView recyclerView;
     ReportsListAdapter itemAdapter;
+
+    public FirebaseFirestore getFirebaseFirestore() {
+        return firebaseFirestore;
+    }
+
     FirebaseFirestore firebaseFirestore;
 
 
@@ -93,15 +104,20 @@ public class SecondActivity extends AppCompatActivity{
         firebaseFirestore = FirebaseFirestore.getInstance();
         recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        Query query = firebaseFirestore.collection("Reportes").orderBy("fecha").orderBy("severidad").orderBy("estado");
+        Query query = firebaseFirestore.collection("Reportes");
+        //.orderBy("fecha").orderBy("severidad").orderBy("estado")
 
         FirestoreRecyclerOptions<Reporte> firestoreRecyclerOptions = new FirestoreRecyclerOptions.Builder<Reporte>().setQuery(query, Reporte.class).build();
 
-        itemAdapter = new ReportsListAdapter(firestoreRecyclerOptions);
+        itemAdapter = new ReportsListAdapter(firestoreRecyclerOptions, this);
         itemAdapter.notifyDataSetChanged();
         recyclerView.setAdapter(itemAdapter);
 
+        getIntent().getSerializableExtra("Details DH");
+
+
     }
+
 
 
     @Override
@@ -129,5 +145,7 @@ public class SecondActivity extends AppCompatActivity{
             }
         });
     }
+
+
 
 }
