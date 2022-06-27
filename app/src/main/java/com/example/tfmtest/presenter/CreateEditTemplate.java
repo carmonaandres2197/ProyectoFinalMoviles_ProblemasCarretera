@@ -145,7 +145,7 @@ public class CreateEditTemplate  extends AppCompatActivity implements AdapterVie
                 String Canton = spCanton.getSelectedItem().toString();
                 String distrito = spDistrito.getSelectedItem().toString();
                 String tipoReporte = sptipoReporte.getSelectedItem().toString();
-
+                reporte.setPendienteAtender("pendienteAtender");
                 //Guardando direccion   como Json
                 Address addres = new Address(Canton,distrito, Provincia);
                 Gson gson = new Gson();
@@ -162,7 +162,7 @@ public class CreateEditTemplate  extends AppCompatActivity implements AdapterVie
                 reporte.setSeveridad(spSeveridad.getSelectedItem().toString());
 
                 try {
-                    db.createReporte(reporte);
+                   // db.createReporte(reporte);
                     db.agregarRegistro(reporte,reporte.getIdReporte(), new Callback<Void>(){
                         @Override
                         public void onSucces(Void result) {
