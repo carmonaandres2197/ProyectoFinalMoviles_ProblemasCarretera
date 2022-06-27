@@ -3,11 +3,14 @@ package com.example.tfmtest.presenter;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
+import android.util.Base64OutputStream;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -34,6 +37,11 @@ import com.example.tfmtest.model.Reporte;
 import com.google.gson.Gson;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.util.Date;
 import java.util.HashMap;
@@ -137,26 +145,21 @@ public class CreateEditTemplate  extends AppCompatActivity implements AdapterVie
                 String Canton = spCanton.getSelectedItem().toString();
                 String distrito = spDistrito.getSelectedItem().toString();
                 String tipoReporte = sptipoReporte.getSelectedItem().toString();
+
                 //Guardando direccion   como Json
                 Address addres = new Address(Canton,distrito, Provincia);
                 Gson gson = new Gson();
                 String jsonDireccion = gson.toJson(addres).toString();
                 reporte.setUbicacion(jsonDireccion);
-
                 String json = jsonDireccion;
                 Address address = gson.fromJson(json, (Type) Address.class);
                  System.out.print(address);
 
-                String longitud= tvLongitude.toString();
-                String latitud= tvLatitude.toString();
-                reporte.setLatitud(longitud);
-                reporte.setLongitud(latitud);
                 reporte.setNombreUsuarioCrea("Christian");
-                reporte.setNombre(String.join(tipoReporte,"-", Character.toString(Provincia.charAt(0)),"-",
-                        Character.toString(Canton.charAt(0)), "-", Character.toString(distrito.charAt(0)),"-", Character.toString(longitud.charAt(0)),
-                        Character.toString(latitud.charAt(0))));
+                reporte.setNombre(tipoReporte + " - "+ Provincia + " - "+ Canton+ " - "+ distrito);
                 reporte.setFecha(new Date());
-                reporte.setImagen(encodeBase64(bitmapImage));
+
+                reporte.setSeveridad(spSeveridad.toString());
 
                 try {
                     db.createReporte(reporte);
@@ -187,6 +190,7 @@ public class CreateEditTemplate  extends AppCompatActivity implements AdapterVie
         byte[] byteFormat = stream.toByteArray();
       return Base64.encodeToString(byteFormat, Base64.NO_WRAP);
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -194,12 +198,58 @@ public class CreateEditTemplate  extends AppCompatActivity implements AdapterVie
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
             imageView.setImageBitmap(bitmap);
             bitmapImage =bitmap;
+            reporte.setImagen(encodeBase64(bitmapImage));
         }
         if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == RESULT_OK) {
             Uri videoUri = data.getData();
+            File codingVideoPath = new File(getRealPathFromURI(videoUri));
             videoView.setVideoURI(videoUri);
+            reporte.setVideo(getStringFile(codingVideoPath));
         }
     }
+
+    private String getRealPathFromURI(Uri contentURI) {
+        String result;
+        Cursor cursor = getContentResolver().query(contentURI, null, null, null, null);
+        if (cursor == null) { // Source is Dropbox or other similar local file path
+            result = contentURI.getPath();
+        } else {
+            cursor.moveToFirst();
+            int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+            result = cursor.getString(idx);
+            cursor.close();
+        }
+        return result;
+    }
+
+    public String getStringFile(File f) {
+        InputStream inputStream = null;
+        String encodedFile = "", lastVal;
+        try {
+            inputStream = new FileInputStream(f.getAbsolutePath());
+
+            byte[] buffer = new byte[10240]; //specify the size to allow
+            int bytesRead;
+            ByteArrayOutputStream output = new ByteArrayOutputStream();
+            Base64OutputStream output64 = new Base64OutputStream(output, Base64.DEFAULT);
+
+            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                output64.write(buffer, 0, bytesRead);
+            }
+            output64.close();
+            encodedFile = output.toString();
+
+        } catch (FileNotFoundException e1) {
+            e1.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        lastVal = encodedFile;
+        return lastVal;
+    }
+
+
+
     public void EnableRuntimePermission(){
         if (ActivityCompat.shouldShowRequestPermissionRationale(CreateEditTemplate.this,
                 Manifest.permission.CAMERA)) {
@@ -228,7 +278,8 @@ public class CreateEditTemplate  extends AppCompatActivity implements AdapterVie
             double latitude = gpsTracker.getLatitude();
             double longitude = gpsTracker.getLongitude();
             reporte.setLatitud(String.valueOf(latitude));
-            tvLatitude.setText(String.valueOf(longitude));
+            reporte.setLongitud(String.valueOf(longitude));
+          tvLatitude.setText(String.valueOf(longitude));
             tvLongitude.setText(String.valueOf(longitude));
         }else{
             gpsTracker.showSettingsAlert();
