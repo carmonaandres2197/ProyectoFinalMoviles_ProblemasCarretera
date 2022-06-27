@@ -279,7 +279,7 @@ public class CreateEditTemplate  extends AppCompatActivity implements AdapterVie
             double longitude = gpsTracker.getLongitude();
             reporte.setLatitud(String.valueOf(latitude));
             reporte.setLongitud(String.valueOf(longitude));
-          tvLatitude.setText(String.valueOf(longitude));
+          tvLatitude.setText(String.valueOf(latitude));
             tvLongitude.setText(String.valueOf(longitude));
         }else{
             gpsTracker.showSettingsAlert();
