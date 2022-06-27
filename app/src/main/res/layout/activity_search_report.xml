@@ -8,12 +8,12 @@
     android:background="@drawable/fondo">
     <LinearLayout android:layout_width="5dp" android:layout_height="5dp">
 
-         <SearchView>
-             android:id="@+id/search"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
+<!--&lt;!&ndash;         <SearchView>&ndash;&gt;-->
+<!--&lt;!&ndash;             android:id="@+id/search"&ndash;&gt;-->
+<!--&lt;!&ndash;             android:layout_width="match_parent"&ndash;&gt;-->
+<!--&lt;!&ndash;             android:layout_height="match_parent"&ndash;&gt;-->
 
-        </SearchView>
+<!--        </SearchView>-->
     </LinearLayout>
 `
 
