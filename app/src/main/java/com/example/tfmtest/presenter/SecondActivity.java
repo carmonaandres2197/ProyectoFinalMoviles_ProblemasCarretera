@@ -46,6 +46,7 @@ public class SecondActivity extends AppCompatActivity implements AdapterView.OnI
     TextView name,email;
     Button signOutBtn;
     Button search_view;
+    Button search_view2;
     List<Reporte> reportes;
     RecyclerView recyclerView;
     ReportsListAdapter itemAdapter;
@@ -127,29 +128,25 @@ public class SecondActivity extends AppCompatActivity implements AdapterView.OnI
         spSeveridad.setAdapter(adSeveridad);
 
         search_view = findViewById(R.id.searchbutton);
+        search_view2 = findViewById(R.id.searchbutton2);
         initDatePicker();
         dateButton = findViewById(R.id.spinner_fecha);
         dateButton.setText(obtenerFechaActual());
         // metodo para buscar por severidad
-        if(spSeveridad.getSelectedItem() !=null)
-        {
-            search_view.setOnClickListener(new View.OnClickListener() {
+        search_view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     search_view(spSeveridad.getSelectedItem().toString());
                 }
             });
-        }else
-        if(spSeveridad.getSelectedItem() ==null){
-
-            // metodos para buscar por fecha
-            search_view.setOnClickListener(new View.OnClickListener() {
+        // metodos para buscar por fecha
+        search_view2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                   search_view_by_fecha(obtenerFechaActual());
                 }
             });
-        }
+
     }
 
     private String obtenerFechaActual() {
@@ -252,7 +249,7 @@ public class SecondActivity extends AppCompatActivity implements AdapterView.OnI
     private void search_view_by_fecha(String s){
 
         Query query = firebaseFirestore.collection("Reportes");
-        FirestoreRecyclerOptions<Reporte> firestoreRecyclerOptions = new FirestoreRecyclerOptions.Builder<Reporte>().setQuery(query.orderBy("fecha"),Reporte.class).build();
+        FirestoreRecyclerOptions<Reporte> firestoreRecyclerOptions = new FirestoreRecyclerOptions.Builder<Reporte>().setQuery(query,Reporte.class).build();
         itemAdapter = new ReportsListAdapter(firestoreRecyclerOptions,this);
         itemAdapter.startListening();
         recyclerView.setAdapter(itemAdapter);
