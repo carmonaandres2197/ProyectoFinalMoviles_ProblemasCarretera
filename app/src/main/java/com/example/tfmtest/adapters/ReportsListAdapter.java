@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.tfmtest.R;
 import com.example.tfmtest.model.Address;
 import com.example.tfmtest.model.Reporte;
+import com.example.tfmtest.presenter.CreateEditTemplate;
 import com.example.tfmtest.presenter.TabActivity;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -76,11 +77,10 @@ public class ReportsListAdapter extends FirestoreRecyclerAdapter<Reporte,Reports
 
     //Evento que permite que con un click en el itemm, se desplegue la pantalla 2 : details DH
         holder.linearLayout.setOnClickListener(new OnClickListener() {
-
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(activity, TabActivity.class);
-                intent.putExtra("Details DH",report);
+                Intent intent = new Intent(activity, CreateEditTemplate.class);
+                intent.putExtra("reporte",report);
                 activity.startActivity(intent);
 
             }
