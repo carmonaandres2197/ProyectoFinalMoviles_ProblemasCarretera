@@ -9,6 +9,11 @@ public class Address{
         this.distrito = distrito;
         this.provincia = direccion;
     }
+
+    public Address() {
+
+    }
+
     public  String getDistrito(){
         return this.canton;
     }

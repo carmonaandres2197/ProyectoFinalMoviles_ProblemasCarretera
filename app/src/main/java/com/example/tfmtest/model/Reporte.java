@@ -18,6 +18,7 @@ public class Reporte implements Comparable<Reporte>, Serializable {
     String imagen;
     String video;
     String pendienteAtender;
+    String tipoReporte;
 
 
     public Reporte(String nombre, Date fecha, String severidad, Boolean estado) {
@@ -45,8 +46,16 @@ public class Reporte implements Comparable<Reporte>, Serializable {
         this.imagen = imagen;
         this.video = video;
         this.pendienteAtender = pendienteAtender;
+        this.tipoReporte = "";
     }
 
+    public String getTipoReporte() {
+        return tipoReporte;
+    }
+
+    public void setTipoReporte(String tipoReporte) {
+        this.tipoReporte = tipoReporte;
+    }
 
     public String getIdReporte() {
         return idReporte;
