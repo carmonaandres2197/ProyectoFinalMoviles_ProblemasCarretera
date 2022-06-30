@@ -153,7 +153,7 @@ public class CreateEditTemplate  extends AppCompatActivity implements AdapterVie
             reporte.setIdReporte(UUID.randomUUID().toString());
             reporte.setEstado(false);
             reporte.setNombreUsuarioCrea("Usuario Invitado Default");
-            reporte.setPendienteAtender("pendienteAtender");
+            reporte.setPendienteAtender("pendiente");
             reporte.setFecha(new Date());
         } else {
        TextView title = findViewById(R.id.TitleReporte);
