@@ -42,11 +42,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //botonParaAbrirTabActivity();
-        // cambiar el metodo por singin()
         googleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                navigateToSecondActivity();
+                signIn();
             }
         });
 

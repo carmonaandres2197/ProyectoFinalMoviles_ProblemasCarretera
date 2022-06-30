@@ -65,6 +65,7 @@ public class SecondActivity extends AppCompatActivity implements AdapterView.OnI
 
 
     public static final int NEW_DERRUMBE_ACTIVITY_REQUEST_CODE = 1;
+    public static final int SEARCH_DERRUMBE_ACTIVITY_REQUEST_CODE = 1;
 
 
     @Override
@@ -101,6 +102,15 @@ public class SecondActivity extends AppCompatActivity implements AdapterView.OnI
                 Intent intent = new Intent(SecondActivity.this, CreateEditTemplate.class);
                 startActivityForResult(intent, NEW_DERRUMBE_ACTIVITY_REQUEST_CODE);
 
+            }
+        });
+
+        FloatingActionButton fab_search = findViewById(R.id.fab_search);
+        fab_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) { /// aca se agrega la activity a  donde se agregar los dmbes de la parte de christian
+                Intent intent = new Intent(SecondActivity.this, TabActivity.class);
+                startActivityForResult(intent, SEARCH_DERRUMBE_ACTIVITY_REQUEST_CODE);
             }
         });
 

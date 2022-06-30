@@ -65,6 +65,18 @@
         android:src="@drawable/ic_add_black_24dp"
         app:backgroundTint="@color/purple_200" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="280dp"
+        android:layout_marginTop="664dp"
+        android:layout_marginEnd="300dp"
+        android:layout_marginBottom="12dp"
+        android:backgroundTint="@color/purple_200"
+        android:clickable="true"
+        app:srcCompat="@android:drawable/ic_dialog_alert" />
+
     <TextView
         android:id="@+id/textSeveridad"
         android:layout_width="120dp"
@@ -143,9 +155,9 @@
     <Button
         android:id="@+id/searchbutton"
         android:layout_width="wrap_content"
-        android:layout_height="18dp"
+        android:layout_height="23dp"
         android:layout_marginStart="320dp"
-        android:layout_marginTop="65dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="45dp"
         android:layout_marginBottom="20dp"
 
@@ -157,10 +169,11 @@
         app:icon="@drawable/ic_menu_search"
         app:iconGravity="start"
         app:iconPadding="105dp" />
+
     <Button
         android:id="@+id/searchbutton2"
         android:layout_width="wrap_content"
-        android:layout_height="18dp"
+        android:layout_height="24dp"
         android:layout_marginStart="320dp"
         android:layout_marginTop="105dp"
         android:layout_marginEnd="45dp"
