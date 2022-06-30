@@ -391,7 +391,7 @@ public class CreateEditTemplate  extends AppCompatActivity implements AdapterVie
             case R.id.spinner_severidad:
                 if(reportRecibido==null) {
                     reporte.setSeveridad(spSeveridad.getSelectedItem().toString());
-                    break;+++++
+                    break;
                 } else break;
 
             case R.id.spinner_tipoReporte:
