@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -75,6 +76,7 @@ public class CreateEditTemplate  extends AppCompatActivity implements AdapterVie
     Reporte reporte = new Reporte();
     Address adress = new Address();
     Reporte reportRecibido;
+    Switch estado;
 
 
     @Override
@@ -101,6 +103,15 @@ public class CreateEditTemplate  extends AppCompatActivity implements AdapterVie
                 Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
                 if (takeVideoIntent.resolveActivity(getPackageManager()) != null) {
                     startActivityForResult(takeVideoIntent, REQUEST_VIDEO_CAPTURE);
+                }
+            }
+        });
+
+        estado.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(reportRecibido!=null) reportRecibido.setEstado(isChecked);
+                else {
+                    reporte.setEstado(isChecked);
                 }
             }
         });
@@ -149,7 +160,7 @@ public class CreateEditTemplate  extends AppCompatActivity implements AdapterVie
             reporte.setIdReporte(UUID.randomUUID().toString());
             reporte.setEstado(false);
             reporte.setNombreUsuarioCrea("Usuario Invitado Default");
-            reporte.setPendienteAtender("pendiente");
+            reporte.setPendienteAtender("Pendiente");
             reporte.setFecha(new Date());
         } else {
        TextView title = findViewById(R.id.TitleReporte);
@@ -159,7 +170,7 @@ public class CreateEditTemplate  extends AppCompatActivity implements AdapterVie
        tvLongitude.setText(reportRecibido.getLongitud());
        sptipoReporte.setSelection( Arrays.asList(sevelist).indexOf(reportRecibido.getTipoReporte()));
        spSeveridad.setSelection(Arrays.asList(sevelist).indexOf(reportRecibido.getSeveridad()));
-       Switch estado = (Switch) findViewById(R.id.estadoReporte);
+       estado = (Switch) findViewById(R.id.estadoReporte);
        estado.setChecked(reportRecibido.getEstado());
 
 
