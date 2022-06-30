@@ -107,15 +107,7 @@ public class CreateEditTemplate  extends AppCompatActivity implements AdapterVie
             }
         });
 
-        estado.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(reportRecibido!=null) reportRecibido.setEstado(isChecked);
-                else {
-                    reporte.setEstado(isChecked);
-                }
-            }
-        });
-
+  
         //spinners
         pcdlist = new ProvinciasCantonesDistritos();
         spProvincia=(Spinner)findViewById(R.id.spinner_provincia);
