@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -73,6 +74,8 @@ public class CreateEditTemplate  extends AppCompatActivity implements AdapterVie
 
     Reporte reporte = new Reporte();
     Address adress = new Address();
+    Reporte reportRecibido;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,7 +145,7 @@ public class CreateEditTemplate  extends AppCompatActivity implements AdapterVie
 
 
 
-        Reporte reportRecibido = (Reporte) getIntent().getSerializableExtra("reporte");
+         reportRecibido = (Reporte) getIntent().getSerializableExtra("reporte");
 
         if(reportRecibido==null){
             //Inizializar datos
@@ -160,6 +163,9 @@ public class CreateEditTemplate  extends AppCompatActivity implements AdapterVie
        tvLongitude.setText(reportRecibido.getLongitud());
        sptipoReporte.setSelection( Arrays.asList(sevelist).indexOf(reportRecibido.getTipoReporte()));
        spSeveridad.setSelection(Arrays.asList(sevelist).indexOf(reportRecibido.getSeveridad()));
+       Switch estado = (Switch) findViewById(R.id.estadoReporte);
+       estado.setChecked(reportRecibido.getEstado());
+
 
             Gson gson = new Gson();
             Address address2 = gson.fromJson(reportRecibido.getUbicacion(), (Type) Address.class);
@@ -360,6 +366,7 @@ public class CreateEditTemplate  extends AppCompatActivity implements AdapterVie
             break;
             case R.id.spinner_canton:
             {
+                if(reportRecibido==null){
                 int iPospv = spProvincia.getSelectedItemPosition();
                 int iPosCan = spCanton.getSelectedItemPosition();
                 String c= spCanton.getSelectedItem().toString();
@@ -370,22 +377,28 @@ public class CreateEditTemplate  extends AppCompatActivity implements AdapterVie
                 adress.setCanton(c);
                 String jsonDireccion = gson.toJson(adress).toString();
                 reporte.setUbicacion(jsonDireccion);
-                adDistrito.notifyDataSetChanged();
+                adDistrito.notifyDataSetChanged();}
             }
             break;
             case R.id.spinner_distrito:
-                String d= spDistrito.getSelectedItem().toString();
-                adress.setDistrito(d);
-                String jsonDireccion = gson.toJson(adress).toString();
-                reporte.setUbicacion(jsonDireccion);
-
+                if(reportRecibido==null) {
+                    String d = spDistrito.getSelectedItem().toString();
+                    adress.setDistrito(d);
+                    String jsonDireccion = gson.toJson(adress).toString();
+                    reporte.setUbicacion(jsonDireccion);
+                }
+                else break;
             case R.id.spinner_severidad:
-                reporte.setSeveridad(spSeveridad.getSelectedItem().toString());
-                break;
+                if(reportRecibido==null) {
+                    reporte.setSeveridad(spSeveridad.getSelectedItem().toString());
+                    break;+++++
+                } else break;
 
             case R.id.spinner_tipoReporte:
-                   reporte.setTipoReporte(sptipoReporte.getSelectedItem().toString());
-                break;
+                if(reportRecibido==null) {
+                    reporte.setTipoReporte(sptipoReporte.getSelectedItem().toString());
+                    break;
+                } else break;
             default:
                 throw new IllegalStateException("Unexpected value: " + parent.getId());
         }
