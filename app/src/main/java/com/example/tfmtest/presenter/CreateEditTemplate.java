@@ -105,10 +105,6 @@ public class CreateEditTemplate  extends AppCompatActivity implements AdapterVie
             }
         });
 
-
-
-
-
         //spinners
         pcdlist = new ProvinciasCantonesDistritos();
         spProvincia=(Spinner)findViewById(R.id.spinner_provincia);

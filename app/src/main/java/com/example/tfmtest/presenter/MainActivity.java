@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
                 navigateToSecondActivity();
             } catch (ApiException e) {
                 Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+                navigateToSecondActivity();
             }
         }
 
@@ -78,10 +79,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
-
     public void navigateEditCreateEvent(View view) {
-        Intent intent = new Intent(MainActivity.this, CreateEditTemplate.class);
-        startActivity(intent);
+        navigateToSecondActivity();
     }
+
+
 
 }
