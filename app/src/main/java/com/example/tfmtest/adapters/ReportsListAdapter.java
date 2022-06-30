@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -35,7 +36,7 @@ import java.lang.reflect.Type;
 public class ReportsListAdapter extends FirestoreRecyclerAdapter<Reporte,ReportsListAdapter.ReportViewHolder>{
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-   Activity activity;
+    Activity activity;
 
 
     public ReportsListAdapter(@NonNull FirestoreRecyclerOptions<Reporte> options, Activity activity) {
@@ -82,13 +83,19 @@ public class ReportsListAdapter extends FirestoreRecyclerAdapter<Reporte,Reports
                 Intent intent = new Intent(activity, CreateEditTemplate.class);
                 intent.putExtra("reporte",report);
                 activity.startActivity(intent);
+                Toast.makeText(
+                        activity,
+                        "Click sobre un Reporte de la lista",
+                        Toast.LENGTH_LONG).show();
 
             }
 
         });
+
     }
 
     private void deleteReporte(String id) {
+
      db.collection("Reportes").document(id).delete().addOnSuccessListener
              (new OnSuccessListener<Void>() {
                  @Override
@@ -133,6 +140,7 @@ public class ReportsListAdapter extends FirestoreRecyclerAdapter<Reporte,Reports
     public class ReportViewHolder extends RecyclerView.ViewHolder {
         public LinearLayout linearLayout;
         public TextView nombrehueco, fecha, severidad, estado;
+        Button searchView;
 
 
         public ReportViewHolder(@NonNull View itemView) {
@@ -142,10 +150,7 @@ public class ReportsListAdapter extends FirestoreRecyclerAdapter<Reporte,Reports
             fecha = itemView.findViewById(R.id.fecha);
             severidad = itemView.findViewById(R.id.severidad);
             estado = itemView.findViewById(R.id.estado);
-
-
-
-
+            searchView = itemView.findViewById(R.id.searchbutton);
         }
     }
 
